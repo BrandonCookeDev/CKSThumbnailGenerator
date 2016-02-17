@@ -1,0 +1,31 @@
+[Image 1]
+X=423
+Y=130
+Size=100
+Angle=0
+[Player 1]
+Name=
+Chr 1=none
+Chr 2=none
+Chr 3=none
+Chr 4=none
+Chr 5=none
+Name X=8
+Name Y=0
+[Player 2]
+Name=
+Chr 1=none
+Chr 2=none
+Chr 3=none
+Chr 4=none
+Chr 5=none
+Name X=-8
+Name Y=0
+Flip Nameplate=1
+[Text]
+Size=22
+Color=16777215
+Italic=1
+Bold=1
+Underline=0
+Strike=0

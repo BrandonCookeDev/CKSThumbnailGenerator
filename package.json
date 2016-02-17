@@ -1,0 +1,19 @@
+{
+  "name": "smash_matchup_picture_gen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brandon Cooke",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.5.0",
+    "body-parser": "~1.5.2",
+    "express": "^4.13.4",
+    "method-override": "~2.1.2",
+    "mongoose": "^4.4.3",
+    "morgan": "~1.2.2"
+  }
+}
