@@ -1,3 +1,5 @@
+console.log("test");
+
 // set up ========================
     var express  = require('express');
     var app      = express();                               // create our app w/ express
@@ -9,7 +11,7 @@
 
     // configuration =================
 
-    mongoose.connect('mongodb://node:nodeuser@mongo.onmodulus.net:27017/uwO3mypu');     // connect to mongoDB database on modulus.io
+    //mongoose.connect('mongodb://node:nodeuser@mongo.onmodulus.net:27017/uwO3mypu');     // connect to mongoDB database on modulus.io
 
     app.use(express.static(__dirname + '/public'));                 // set the static files location /public/img will be /img for users
     app.use(morgan('dev'));                                         // log every request to the console
@@ -19,7 +21,8 @@
     app.use(methodOverride());
 
     console.log(__dirname);
-    
+    app.use(express.static(__dirname + '/../node_modules'));
+    app.use(express.static(__dirname + '/../client/scripts'));
     app.get('/', function(req, res){
     	var p = path.join(__dirname + '/../client/index.html');
     	console.log(p);
@@ -27,8 +30,8 @@
     });
     app.get('/hello', function(req, res){
     	res.send('hello world');    	
-    })
+    });
     
     // listen (start app with node server.js) ======================================
-    app.listen(8080);
-    console.log("App listening on port 8080");
+    app.listen(1337);
+    console.log("App listening on port 1337");

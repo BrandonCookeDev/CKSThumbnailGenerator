@@ -3,51 +3,68 @@
 	<head>
 		<title>Matchup Generator: Smash Bros</title>
 		<style>
+			div.wrapper{
+				width:1200px;
+				overflow:hidden;
+				border: 2px solid black;
+			}
 			div.form{
 				width:30%;				
-				background-color:#bfbfbf;	
+				float:left;
+				background-color:#bfbfbf;
+				border: 2px solid black;	
 			}
 			div.preview{
 				width:70%;			
 				background-color:#a6a6a6;
+				border: 2px solid black;
+				float:left;
+			}
+			canvas.preview{
+				border: 1px solid black;
 			}
 		</style>
 	</head>
 	
 	<body ng-controller='MainCtrl'>
-		<div class='form'>
-			<h2>Options</h2>
-			<form id='previewForm'>
-				Background Image: <input type='button' id='bgImageBtn' value='Browse'/>
-				<br />
-				Player 1: <input type='text' id='player1Textbox' />
-				<br />
-				<select id='player1CharacterDropdown'>
-					<option ng-repeat='character in characters' value='{{character}}'>{{character}}</option>
-				</select>
-				<br />		
-				Player 2: <input type='text' id='player2Textbox' />
-				<br />
-				
-				<br />
-				
-			</form>
-		</div>
-		<div class='preview'>
-			<span>
-				<h2>Preview</h2>
-			</span>
-			<span>
-				<canvas id='previewCanvas'>
-				
-				</canvas>
-			</span>
-			<span>
-				<input type='button' id='submitPictureBtn' onClick='submitPicture()'/>
-			</span>
+		<div class='wrapper'>
+			<div class='form'>
+				<h2>Options</h2>
+				<form id='previewForm'>
+					Background Image: <input type='file' id='bgImageBtn' value='Browse'/>
+					<br />
+					Player 1: <input type='text' id='player1Textbox' />
+					<br />
+					Character 1:
+					<select id='player1CharacterDropdown'>
+						<option ng-repeat='character in characters' value='{{character}}'>{{character}}</option>
+					</select>
+					<br />		
+					Player 2: <input type='text' id='player2Textbox' />
+					<br />
+					Character 2:
+					<select id='player2CharacterDropdown'>
+						<option ng-repeat='character in characters' value='{{character}}'>{{character}}</option>
+					</select>
+					<br />					
+				</form>
+			</div>
+			<div class='preview'>
+				<span>
+					<h2>Preview</h2>
+				</span>
+				<span>
+					<canvas id='previewCanvas'>
+					
+					</canvas>
+				</span>
+				<span>
+					<input type='button' id='submitPictureBtn' value='Save' onclick='submitPicture()'/>
+				</span>
+			</div>
 		</div>
 	</body>
 	
-	<script src='node_modules/angular/angular.min.js'></script>
-	<script src='client/scripts/application.js'></script>
+	<script src='../node_modules/angular/angular.min.js'></script>
+	<script src='/scripts/application.js'></script>
 </html>
