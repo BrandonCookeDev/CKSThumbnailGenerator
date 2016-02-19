@@ -30,26 +30,39 @@ function handleImage(e){
 /** END LOAD IMAGE TO CANVAS **/
 
 /** PAINT CHARACTER ON CANVAS **/
+function getImagePath(char){
+	return '/images/Melee/Thumbs/'+char+'.png';
+}
+
+$('#player1CharacterDropdown').change(function(){
+	var char = $(this);
+	//var char = $('option:selected', this)
+	drawCharacter(getImagePath(char.val()), 1);
+});
+
+$('#player2CharacterDropdown').on('change', function(e){
+	var char = $('option:selected', this)
+	drawCharacter(getImagePath(char.val()), 2);
+});
+
 function drawCharacter(imgPath, charNumber){
+	var canvas = document.getElementById('previewCanvas');
 	var ctx = getCanvas('previewCanvas');
 	var img = new Image();
 	img.src = imgPath;
-	img.onload = function(){
-		switch(charNumber){	    	
-			var coords = getCharacterCoordinates(charNumber);
-			case 1: ctx.drawImage(img, coords.x, coords.y);
-				break;
-			case 2: ctx.drawImage(img, 100, 100);
-				break;
-			case 3: ctx.drawImage(img, 100, 100);
-				break;
-			case 4:ctx.drawImage(img, 100, 100);
-				break;
-			default:
-				throw new Exception('Character number exceeded limit of 4');
-		}
+	img.onload = function(){	
+		var coords = getCharacterCoordinates(charNumber);
+		if(charNumber === 1)
+			ctx.drawImage(img, coords.x, coords.y);				
+		else if(charNumber === 2)
+			ctx.drawImage(img, canvas.width - 50, canvas.height - 50);			
+		else if(charNumber === 3)
+			ctx.drawImage(img, 100, 100);				
+		else if(charNumber === 4)
+			ctx.drawImage(img, 100, 100);
 	}
 }
+
 
 
 

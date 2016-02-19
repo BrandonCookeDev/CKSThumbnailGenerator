@@ -36,26 +36,31 @@
 					Background Image: <input type='file' id='bgImageFile' value='Browse' onchange='handleImage(this)'/>
 					<br />
 					<br />
+					<span>
 					Player 1: <input type='text' id='player1Textbox' ng-model='player1' />
-					<br />
-					<br />
-					Character 1:
-					<select id='player1CharacterDropdown'>
-						<option ng-repeat='character in characters' value='{{character}}' ng-model='character1'>
-							{{character}}
-						</option>
-					</select>
-					<br />
-					<br />		
+					
 					Player 2: <input type='text' id='player2Textbox' ng-model='player2' />
 					<br />
 					<br />
-					Character 2:
-					<select id='player2CharacterDropdown'>
-						<option ng-repeat='character in characters' value='{{character}}' ng-model='character2' >
+					</span>
+					<span>
+					Character 1:
+					<select id='player1CharacterDropdown'>
+						<option ng-repeat='character in characters' value='{{character}}' 
+							ng-model='character1' id='character1' >
 							{{character}}
 						</option>
 					</select>
+					
+					Character 2:
+					<select id='player2CharacterDropdown'>
+						<option ng-repeat='character in characters' value='{{character}}' 
+							ng-model='character2' id='character2' >
+							{{character}}
+						</option>
+					</select>
+					</span>
+					
 					<br />
 					<br />					
 				</form>
@@ -71,7 +76,7 @@
 				</span>
 				<span>
 					<input type='button' id='submitPictureBtn' value='Save' onclick='submitPicture()'/>
-					<input type='button' id='testBtn' value='test' onclick='drawCharacter("/images/Melee/Thumbs/Sheik.png")'/>
+					<input type='button' id='testBtn' value='test' onclick='drawCharacter("/images/Melee/Thumbs/Sheik.png", 1)'/>
 				</span>
 				<!-- 
 					<img src='/images/Melee/Thumbs/Sheik.png' />
@@ -84,6 +89,7 @@
 	<script src='/scripts/jquery.js'></script>
 	<script src='/scripts/bootstrap.min.js'></script>
   	<script src='/scripts/angular.min.js'></script> 
+  	<script src='/scripts/config.js'></script>
   	<script src='/scripts/application.js'></script>
   	<script src='/scripts/canvasImpl.js'></script>
 </html>
