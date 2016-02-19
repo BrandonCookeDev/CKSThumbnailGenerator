@@ -5,7 +5,7 @@
 		<style>
 			div.wrapper{
 				align:center;
-				width:1200px;
+				width:1800px;
 				overflow:hidden;
 			}
 			div.form{
@@ -15,6 +15,7 @@
 				border: 2px solid black;	
 			}
 			div.preview{
+				text-align:center;
 				width:68%;			
 				background-color:#a6a6a6;
 				border: 2px solid black;
@@ -34,21 +35,25 @@
 					Background Image: <input type='file' id='bgImageFile' value='Browse' onchange='handleImage(this)'/>
 					<br />
 					<br />
-					Player 1: <input type='text' id='player1Textbox' />
+					Player 1: <input type='text' id='player1Textbox' ng-model='player1' />
 					<br />
 					<br />
 					Character 1:
 					<select id='player1CharacterDropdown'>
-						<option ng-repeat='character in characters' value='{{character}}'>{{character}}</option>
+						<option ng-repeat='character in characters' value='{{character}}' ng-model='character1'>
+							{{character}}
+						</option>
 					</select>
 					<br />
 					<br />		
-					Player 2: <input type='text' id='player2Textbox' />
+					Player 2: <input type='text' id='player2Textbox' ng-model='player2' />
 					<br />
 					<br />
 					Character 2:
 					<select id='player2CharacterDropdown'>
-						<option ng-repeat='character in characters' value='{{character}}'>{{character}}</option>
+						<option ng-repeat='character in characters' value='{{character}}' ng-model='character2' >
+							{{character}}
+						</option>
 					</select>
 					<br />
 					<br />					
@@ -59,16 +64,21 @@
 					<h2>Preview</h2>
 				</span>
 				<span>
-					<canvas id='previewCanvas' height='240' width='420'>
+					<canvas id='previewCanvas' height='520' width='1080'>
 						
 					</canvas>
 				</span>
 				<span>
 					<input type='button' id='submitPictureBtn' value='Save' onclick='submitPicture()'/>
+					<input type='button' id='testBtn' value='test' onclick='drawCharacter("/images/Melee/Thumbs/Sheik.png")'/>
 				</span>
+				<!-- 
+					<img src='/images/Melee/Thumbs/Sheik.png' />
+				-->
 			</div>
 		</div>
 	</body>
+	
 	
 	<script src='/scripts/jquery.js'></script>
   	<script src='/scripts/angular.min.js'></script> 

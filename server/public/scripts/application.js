@@ -8,4 +8,14 @@ app.controller("MainCtrl", ['$scope', function($scope){
 	    'Link', 'Mr. Game & Watch', 'Roy', 'Mewtwo', 'Zelda', 'Ness', 'Pichu',
 	    'Bowser', 'Kirby'
 	];
+	
+	$scope.player1 = '';
+	$scope.character1 = '';
+	
+	$scope.player2 = '';
+	$scope.character2 = '';	
+	
+	$scope.appendExtension = function(name){
+		return name + '.png';
+	}
 }]);
