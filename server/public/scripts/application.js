@@ -7,7 +7,7 @@ var getFilePath = function(name){
 app.controller("MainCtrl", ['$scope', function($scope){
 	$scope.characters = ['Choose One',
 	    'Fox', 'Falco', 'Marth', 'Sheik', 'Jigglypuff', 'Peach',
-	    'Ice Climbers', 'Captain Falcon', 'Pikachu', 'Samus', 'Dr. Mario',
+	    'Ice Climbers', 'Captain Falcon', 'Pikachu', 'Samus', 'Dr Mario',
 	    'Yoshi', 'Luigi', 'Ganon', 'Mario', 'Young Link', 'Donkey Kong', 
 	    'Link', 'Mr. Game & Watch', 'Roy', 'Mewtwo', 'Zelda', 'Ness', 'Pichu',
 	    'Bowser', 'Kirby'
@@ -20,3 +20,5 @@ app.controller("MainCtrl", ['$scope', function($scope){
 	$scope.character2 = null;
 	
 }]);
+
+
