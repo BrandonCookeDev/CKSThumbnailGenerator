@@ -1,5 +1,11 @@
 var background = null;
 
+function getCanvas(canvasId){
+	var canvas = document.getElementById(canvasId),
+	context = canvas.getContext('2d');
+	return context;
+};
+
 /** LOAD IMAGE TO CANVAS **/
 var imageLoader = document.getElementById('bgImageFile');
 imageLoader.addEventListener('change', handleImage, false);
@@ -21,18 +27,27 @@ function handleImage(e){
     reader.readAsDataURL(e.target.files[0]);     
 }
 
-function getCanvas(canvasId){
-	var canvas = document.getElementById(canvasId),
-	context = canvas.getContext('2d');
-	return context;
-};
+/** END LOAD IMAGE TO CANVAS **/
 
-function drawCharacter(imgPath){
+/** PAINT CHARACTER ON CANVAS **/
+function drawCharacter(imgPath, charNumber){
 	var ctx = getCanvas('previewCanvas');
-	var test = new Image();
-	test.src = imgPath;
-	test.onload = function(){
-	    ctx.drawImage(test, 100, 100);
+	var img = new Image();
+	img.src = imgPath;
+	img.onload = function(){
+		switch(charNumber){	    	
+			var coords = getCharacterCoordinates(charNumber);
+			case 1: ctx.drawImage(img, coords.x, coords.y);
+				break;
+			case 2: ctx.drawImage(img, 100, 100);
+				break;
+			case 3: ctx.drawImage(img, 100, 100);
+				break;
+			case 4:ctx.drawImage(img, 100, 100);
+				break;
+			default:
+				throw new Exception('Character number exceeded limit of 4');
+		}
 	}
 }
 
