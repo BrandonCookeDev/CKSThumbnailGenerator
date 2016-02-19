@@ -4,18 +4,18 @@
 		<title>Matchup Generator: Smash Bros</title>
 		<style>
 			div.wrapper{
+				align:center;
 				width:1200px;
 				overflow:hidden;
-				border: 2px solid black;
 			}
 			div.form{
-				width:30%;				
+				width:28%;				
 				float:left;
 				background-color:#bfbfbf;
 				border: 2px solid black;	
 			}
 			div.preview{
-				width:70%;			
+				width:68%;			
 				background-color:#a6a6a6;
 				border: 2px solid black;
 				float:left;
@@ -31,21 +31,26 @@
 			<div class='form'>
 				<h2>Options</h2>
 				<form id='previewForm'>
-					Background Image: <input type='file' id='bgImageBtn' value='Browse'/>
+					Background Image: <input type='file' id='bgImageFile' value='Browse' onchange='handleImage(this)'/>
+					<br />
 					<br />
 					Player 1: <input type='text' id='player1Textbox' />
+					<br />
 					<br />
 					Character 1:
 					<select id='player1CharacterDropdown'>
 						<option ng-repeat='character in characters' value='{{character}}'>{{character}}</option>
 					</select>
+					<br />
 					<br />		
 					Player 2: <input type='text' id='player2Textbox' />
+					<br />
 					<br />
 					Character 2:
 					<select id='player2CharacterDropdown'>
 						<option ng-repeat='character in characters' value='{{character}}'>{{character}}</option>
 					</select>
+					<br />
 					<br />					
 				</form>
 			</div>
@@ -54,7 +59,7 @@
 					<h2>Preview</h2>
 				</span>
 				<span>
-					<canvas id='previewCanvas'>
+					<canvas id='previewCanvas' height='240' width='420'>
 						
 					</canvas>
 				</span>
@@ -65,6 +70,8 @@
 		</div>
 	</body>
 	
-  	<script src='/scripts/angular.min.js'></script>
+	<script src='/scripts/jquery.js'></script>
+  	<script src='/scripts/angular.min.js'></script> 
   	<script src='/scripts/application.js'></script>
+  	<script src='/scripts/canvasImpl.js'></script>
 </html>
