@@ -9,7 +9,7 @@ app.controller("MainCtrl", ['$scope', function($scope){
 	    'Fox', 'Falco', 'Marth', 'Sheik', 'Jigglypuff', 'Peach',
 	    'Ice Climbers', 'Captain Falcon', 'Pikachu', 'Samus', 'Dr Mario',
 	    'Yoshi', 'Luigi', 'Ganon', 'Mario', 'Young Link', 'Donkey Kong', 
-	    'Link', 'Mr. Game & Watch', 'Roy', 'Mewtwo', 'Zelda', 'Ness', 'Pichu',
+	    'Link', 'Mr Game And Watch', 'Roy', 'Mewtwo', 'Zelda', 'Ness', 'Pichu',
 	    'Bowser', 'Kirby'
 	];
 	

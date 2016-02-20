@@ -17,6 +17,15 @@ var player4 = null;
 var tournamentLogo = null;
 var gameLogo = null;
 var streamLogo = null;
+var player1TextPt = {x: 10,	y: 300};
+var player1TextSz = 35;
+var player2TextPt = {x: 10,	y: 800};
+var player2TextSz = 35;
+var player3TextPt = {x: 10,	y: 800};
+var player3TextSz = 35;
+var player4TextPt = {x: 10,	y: 800};
+var player4TextSz = 35;
+var nameplateTextColor = null;
 
 var duplicateNameplate = false;
 
@@ -50,15 +59,18 @@ function redrawCanvas(){
 		if(nameplateUrl){
 			
 		}
+		else{
+			drawText(player1, player1TextPt.x, player1TextPt.y);
+		}
 	}
 	if(player2){
-		
+		drawText(player2, player2TextPt.x, player2TextPt.y);
 	}
 	if(player3){
-		
+		drawText(player3, player3TextPt.x, player3TextPt.y);
 	}
 	if(player4){
-		
+		drawText(player4, player4TextPt.x, player4TextPt.y);
 	}
 	if(tournamentLogo){
 		
@@ -101,7 +113,8 @@ function handleImage(e){
         	img.width = canvas.width;
         	img.height = canvas.height;
         	background = img;
-            ctx.drawImage(img,0,0, img.width, img.height);
+            redrawCanvas();
+        	//ctx.drawImage(img,0,0, img.width, img.height);
         }
         img.src = event.target.result;
     }
@@ -114,7 +127,7 @@ $('#player1CharacterDropdown').change(function(){
 	var char = $(this);
 	if(char.val() === 'Choose One') {
 		char1url = null;
-		return;
+		redrawCanvas();
 	}
 	else{
 		char1url = getImagePath(char.val().replace(" ", ""));
@@ -126,7 +139,7 @@ $('#player2CharacterDropdown').change(function(){
 	var char = $(this);
 	if(char.val() === 'Choose One') {
 		char2url = null;
-		return;
+		redrawCanvas();
 	}
 	else{
 		char2url = getImagePath(char.val().replace(" ", ""));	
@@ -138,7 +151,7 @@ $('#player3CharacterDropdown').change(function(){
 	var char = $(this);
 	if(char.val() === 'Choose One') {
 		char3url = null;
-		return;
+		redrawCanvas();
 	}
 	else{
 		char3url = getImagePath(char.val().replace(" ", ""));
@@ -195,10 +208,11 @@ function drawNameplate(imgPath, duplicate){
 };
 
 
-function drawPlayerName(text, x, y, color){
+function drawText(text, x, y, color){
 	var ctx = getCanvas('previewCanvas');
-	//if(color)
-	//	var gradient.addColorStop("0". )
+	
+	ctx.fillStyle = nameplateTextColor;
+	ctx.font=String(player1TextSz) + 'px Arial';
 	ctx.fillText(text, x, y);
 };
 
@@ -257,6 +271,10 @@ $('#player4Textbox').on('input',function(){
 	redrawCanvas();
 });
 
+/** CHANGE TEXT COLOR **/
+$('#nameplateTextColor').on('input', function(){
+	nameplateTextColor = $(this).val();
+});
 
 /** MISC **/
 function readURL(input) {
