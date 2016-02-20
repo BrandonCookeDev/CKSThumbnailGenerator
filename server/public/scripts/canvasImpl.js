@@ -57,20 +57,21 @@ function redrawCanvas(){
 	}
 	if(player1){
 		if(nameplateUrl){
-			
+			var pt = getNameplateMidY(nameplateUrl, canvas, 'left');
+			drawText(player1, nameplateX + )
 		}
 		else{
-			drawText(player1, player1TextPt.x, player1TextPt.y);
+			drawText(player1, player1TextPt.x, player1TextPt.y, nameplateTextColor);
 		}
 	}
 	if(player2){
-		drawText(player2, player2TextPt.x, player2TextPt.y);
+		drawText(player2, player2TextPt.x, player2TextPt.y, nameplateTextColor);
 	}
 	if(player3){
-		drawText(player3, player3TextPt.x, player3TextPt.y);
+		drawText(player3, player3TextPt.x, player3TextPt.y, nameplateTextColor);
 	}
 	if(player4){
-		drawText(player4, player4TextPt.x, player4TextPt.y);
+		drawText(player4, player4TextPt.x, player4TextPt.y, nameplateTextColor);
 	}
 	if(tournamentLogo){
 		
@@ -178,15 +179,15 @@ function drawCharacter(imgPath, charNumber){
 	var img = new Image();
 	img.src = imgPath;
 	img.onload = function(){	
-		var coords = getCharacterCoordinates(charNumber);
+		var coords = getCharacterCoordinates(canvas, img, charNumber);
 		if(charNumber === 1)
 			ctx.drawImage(img, coords.x, coords.y);				
 		else if(charNumber === 2)
-			ctx.drawImage(img, canvas.width - img.width - 50, canvas.height - img.height - 50);			
+			ctx.drawImage(img, coords.x, coords.y);			
 		else if(charNumber === 3)
-			ctx.drawImage(img, 100, 100);				
+			ctx.drawImage(img, coords.x, coords.y);				
 		else if(charNumber === 4)
-			ctx.drawImage(img, canvas.width - img.width - 100, canvas.height - img.height - 100);
+			ctx.drawImage(img, coords.x, coords.y);
 	}
 };
 
@@ -197,21 +198,38 @@ function drawNameplate(imgPath, duplicate){
 	img.src = imgPath;
 	img.onload = function(){
 		nameplateX = 0
-		nameplateY = canvas.height - 100;
-		ctx.drawImage(img, nameplateX, nameplateY);
-		if(duplicate){
-			nameplateDupX = canvas.width - img.width - 100;
-			nameplateDupY = canvas.height - 100
-			ctx.drawImage(img, nameplateDupX, nameplateDupY);
-		}
+		nameplateY = canvas.height - img.height;
+		
+		var temp = img.src;
+		var imgRev = new Image();
+		imgRev.src = temp.substring(0, temp.indexOf('.png')) + ' Reverse.png';
+		nameplateDupX = canvas.width - imgRev.width;
+		nameplateDupY = canvas.height - imgRev.height;
+		
+		ctx.drawImage(img, nameplateX, nameplateY );
+		ctx.drawImage(imgRev, nameplateDupX, nameplateDupY);
 	}
 };
 
+function getNameplateMidpointY(imgUrl, canvas, side){
+	var img = new Image();
+	img.src = imgUrl;
+	var x = null;
+	var y = null;
+	var justify = null;
+	if(side === 'left')
+		x = 5;
+	else if(side === 'right')
+		x = canvas.width - 5;
+	
+	y = (canvas.height) - (img.height/2);
+	
+}
+
 
 function drawText(text, x, y, color){
-	var ctx = getCanvas('previewCanvas');
-	
-	ctx.fillStyle = nameplateTextColor;
+	var ctx = getCanvas('previewCanvas');	
+	ctx.fillStyle = color;
 	ctx.font=String(player1TextSz) + 'px Arial';
 	ctx.fillText(text, x, y);
 };
@@ -269,6 +287,13 @@ $('#player3Textbox').on('input',function(){
 $('#player4Textbox').on('input',function(){
 	player4 = $(this).val();
 	redrawCanvas();
+});
+
+
+$('#defaultPlatesBtn').click(function(){
+	var path = getNameplatesPath('Default Nameplate');
+	nameplateUrl = path;
+	drawNameplate(path, true);
 });
 
 /** CHANGE TEXT COLOR **/
