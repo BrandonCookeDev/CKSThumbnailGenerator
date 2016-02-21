@@ -41,13 +41,13 @@ function redrawCanvas(){
 	}
 	if(char3url){
 		drawCharacter(char3url, 3);
-	}
+	} 
 	if(char4url){
 		drawCharacter(char4url, 4);		
 	}
 	if(char1url){
 		drawCharacter(char1url, 1);		
-	}
+	} 
 	if(char2url){
 		drawCharacter(char2url, 2);
 	}
@@ -55,10 +55,28 @@ function redrawCanvas(){
 		var nameplate = drawNameplate(nameplateUrl);
 		drawNameplate(nameplate, duplicateNameplate);
 	}
+	
+	
+	if(tournamentLogo){
+		
+	}
+	if(gameLogo){
+		
+	}
+	if(streamLogo){
+		
+	}
+};
+
+function rewriteCanvas(){
+	var canvas = document.getElementById('previewCanvas');
+	var ctx = getCanvas('previewCanvas');
+	
 	if(player1){
 		if(nameplateUrl){
-			var pt = getNameplateMidY(nameplateUrl, canvas, 'left');
-			drawText(player1, nameplateX + )
+			var side = 'left';
+			var pt = getNameplateMidY(nameplateUrl, canvas, side);
+			drawText(player1, pt.x, pt.y, nameplateTextColor, side);
 		}
 		else{
 			drawText(player1, player1TextPt.x, player1TextPt.y, nameplateTextColor);
@@ -73,16 +91,7 @@ function redrawCanvas(){
 	if(player4){
 		drawText(player4, player4TextPt.x, player4TextPt.y, nameplateTextColor);
 	}
-	if(tournamentLogo){
-		
-	}
-	if(gameLogo){
-		
-	}
-	if(streamLogo){
-		
-	}
-};
+}
 
 /** RETURN URL TO IMAGE **/
 function getImagePath(char){
@@ -123,54 +132,6 @@ function handleImage(e){
 };
 
 
-/** EVENT LISTENERS FOR DROPDOWNS **/
-$('#player1CharacterDropdown').change(function(){
-	var char = $(this);
-	if(char.val() === 'Choose One') {
-		char1url = null;
-		redrawCanvas();
-	}
-	else{
-		char1url = getImagePath(char.val().replace(" ", ""));
-		redrawCanvas();
-	}
-});
-
-$('#player2CharacterDropdown').change(function(){
-	var char = $(this);
-	if(char.val() === 'Choose One') {
-		char2url = null;
-		redrawCanvas();
-	}
-	else{
-		char2url = getImagePath(char.val().replace(" ", ""));	
-		redrawCanvas();
-	}
-});
-
-$('#player3CharacterDropdown').change(function(){
-	var char = $(this);
-	if(char.val() === 'Choose One') {
-		char3url = null;
-		redrawCanvas();
-	}
-	else{
-		char3url = getImagePath(char.val().replace(" ", ""));
-		redrawCanvas();
-	}
-});
-
-$('#player4CharacterDropdown').change(function(){
-	var char = $(this);
-	if(char.val() === 'Choose One') {
-		char4url = null;
-		redrawCanvas();
-	}
-	else{
-		char4url = getImagePath(char.val().replace(" ", ""));
-		redrawCanvas();
-	}
-});
 
 /** DRAW CHARACTER OR NAMEPLATE ONTO CANVAS **/
 function drawCharacter(imgPath, charNumber){
@@ -182,8 +143,11 @@ function drawCharacter(imgPath, charNumber){
 		var coords = getCharacterCoordinates(canvas, img, charNumber);
 		if(charNumber === 1)
 			ctx.drawImage(img, coords.x, coords.y);				
-		else if(charNumber === 2)
-			ctx.drawImage(img, coords.x, coords.y);			
+		else if(charNumber === 2){
+			
+			ctx.scale(-1, 1);
+			ctx.drawImage(img, coords.x, coords.y);
+		}
 		else if(charNumber === 3)
 			ctx.drawImage(img, coords.x, coords.y);				
 		else if(charNumber === 4)
@@ -211,7 +175,7 @@ function drawNameplate(imgPath, duplicate){
 	}
 };
 
-function getNameplateMidpointY(imgUrl, canvas, side){
+function getNameplateMidY(imgUrl, canvas, side){
 	var img = new Image();
 	img.src = imgUrl;
 	var x = null;
@@ -222,12 +186,13 @@ function getNameplateMidpointY(imgUrl, canvas, side){
 	else if(side === 'right')
 		x = canvas.width - 5;
 	
-	y = (canvas.height) - (img.height/2);
+	y = (canvas.height) - (img.height/2);		
 	
+	return {x:x, y:y};
 }
 
 
-function drawText(text, x, y, color){
+function drawText(text, x, y, color, side){
 	var ctx = getCanvas('previewCanvas');	
 	ctx.fillStyle = color;
 	ctx.font=String(player1TextSz) + 'px Arial';
@@ -235,71 +200,6 @@ function drawText(text, x, y, color){
 };
 
 /** END DRAW CHARACTERS AND NAMEPLATES **/
-
-/** SET CANVAS SIZE BOXES **/
-$('#customWidthBox').val($('#previewCanvas').width());
-
-$('#customWidthBox').change(function(){
-	var box = $(this);
-	$('#previewCanvas').width(box.val());
-});
-
-$('#customHeightBox').val($('#previewCanvas').height());
-
-$('#customHeightBox').change(function(){
-	var box = $(this);
-	$('#previewCanvas').height(box.val());	
-});
-
-/** SET PALYER NAMES IN TEXT BOXES **/
-$('#player1Textbox').change(function(){
-	var box = $(this);
-	player1 = box.val();
-	redrawCanvas();
-});
-
-/** SET THE NAMEPLATE DUPLICATION VARIABLE **/
-$('duplicateNameplateCheck').change(function(){
-	var checked = $(this).prop('checked');
-	if(checked)
-		duplicateNameplate = true;
-	else
-		duplicateNameplate = false;
-	redrawCanvas();
-});
-
-/** CHANGE PLAYER NAMES **/
-$('#player1Textbox').on('input',function(){
-	player1 = $(this).val();
-	redrawCanvas();
-});
-
-$('#player2Textbox').on('input',function(){
-	player2 = $(this).val();
-	redrawCanvas();
-});
-
-$('#player3Textbox').on('input',function(){
-	player3 = $(this).val();
-	redrawCanvas();
-});
-
-$('#player4Textbox').on('input',function(){
-	player4 = $(this).val();
-	redrawCanvas();
-});
-
-
-$('#defaultPlatesBtn').click(function(){
-	var path = getNameplatesPath('Default Nameplate');
-	nameplateUrl = path;
-	drawNameplate(path, true);
-});
-
-/** CHANGE TEXT COLOR **/
-$('#nameplateTextColor').on('input', function(){
-	nameplateTextColor = $(this).val();
-});
 
 /** MISC **/
 function readURL(input) {
@@ -339,4 +239,9 @@ var drawBackground = function(canvasId, image){
 	var fileReader = new FileReader(); 
 	
 };
+
+function sleep(delay) {
+    var start = new Date().getTime();
+    while (new Date().getTime() < start + delay);
+  }
 
