@@ -34,22 +34,22 @@ $('duplicateNameplateCheck').change(function(){
 /** CHANGE PLAYER NAMES **/
 $('#player1Textbox').on('input',function(){
 	player1 = $(this).val();
-	rewriteCanvas();
+	redrawCanvas();
 });
 
 $('#player2Textbox').on('input',function(){
 	player2 = $(this).val();
-	rewriteCanvas();
+	redrawCanvas();
 });
 
 $('#player3Textbox').on('input',function(){
 	player3 = $(this).val();
-	rewriteCanvas();
+	redrawCanvas();
 });
 
 $('#player4Textbox').on('input',function(){
 	player4 = $(this).val();
-	rewriteCanvas();
+	redrawCanvas();
 });
 
 
