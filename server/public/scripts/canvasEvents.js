@@ -34,22 +34,22 @@ $('duplicateNameplateCheck').change(function(){
 /** CHANGE PLAYER NAMES **/
 $('#player1Textbox').on('input',function(){
 	player1 = $(this).val();
-	redrawCanvas();
+	//redrawCanvas();
 });
 
 $('#player2Textbox').on('input',function(){
 	player2 = $(this).val();
-	redrawCanvas();
+	//redrawCanvas();
 });
 
 $('#player3Textbox').on('input',function(){
 	player3 = $(this).val();
-	redrawCanvas();
+	//redrawCanvas();
 });
 
 $('#player4Textbox').on('input',function(){
 	player4 = $(this).val();
-	redrawCanvas();
+	//redrawCanvas();
 });
 
 
@@ -112,4 +112,20 @@ $('#player4CharacterDropdown').change(function(){
 		char4url = getImagePath(char.val().replace(" ", ""));
 		redrawCanvas();
 	}
+});
+
+/** WRITE PLAYERS NAMES **/
+$('#submitTextBtn').click('input', function(){
+	rewriteCanvas();
+});
+
+/** COLOR PICKER CHANGES **/
+$('#nameplateTextColor').change(function(){
+	rewriteCanvas();
+});
+
+/** DOWNLOAD PICTURE **/
+$('#downloadBtn').click(function(){
+	var dataUrl = $('#previewCanvas').toDataUrl('image/png');
+	
 });

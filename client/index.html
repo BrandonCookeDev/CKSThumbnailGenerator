@@ -44,7 +44,7 @@
 					<br />
 					Background Image: <input type='file' id='bgImageFile' value='Browse' onchange='handleBackground(this)'/>
 					<br />
-					Nameplate Image: <input type='file' id='nameplateFile' /> <input value='default nameplate' type='button' id='defaultPlatesBtn' />
+					Nameplate Image: <i>(Coming Soon)</i> <input type='file' id='nameplateFile' /> <input value='default nameplate' type='button' id='defaultPlatesBtn' />
 					Font Color<input type='color' id='nameplateTextColor' />
 					<br />
 					Duplicate Copy on Other Side? <input type='checkbox' id='duplicateNameplateCheck' />
@@ -100,15 +100,16 @@
 						</option>
 					</select>
 					</span>
+					<span><br /><input style="{float:right;}" type='button' id='submitTextBtn' value='Submit Names'/></span>
 					
 					<hr />
 					<h4>Extras</h4>
 					<br />
-					Tournament Logo <input type='file' id='tournamentLogoFile' />
+					Tournament Logo <input type='file' id='tournamentLogoFile' onchange='handleTourney(this)'/>
 					<br />
-					Game Logo <input type='file' id='gameLogoFile' />
+					Game Logo <input type='file' id='gameLogoFile' onchange='handleGame(this)' />
 					<br />
-					Stream Logo <input type='file' id='streamLogoFile' />
+					Stream Logo <input type='file' id='streamLogoFile' onchange='handleStream(this)' />
 					<br />
 					<hr />
 				</form>
@@ -122,8 +123,10 @@
 						
 					</canvas>
 				</span>
+				<br /><br />
 				<span>
-					<input type='button' id='submitPictureBtn' value='Save' onclick='submitPicture()'/>
+					<input type='image' id='downloadBtn' src='/images/misc/download.png' height='150' width='150'/>
+					<!-- <input type='button' id='submitPictureBtn' value='Save' onclick='submitPicture()'/> -->
 					<!-- <input type='button' id='testBtn' value='test' onclick='drawCharacter("/images/Melee/Thumbs/Sheik.png", 1)'/> -->
 				</span>
 				<!-- 

@@ -17,6 +17,7 @@ var player4 = null;
 var tournamentLogo = null;
 var gameLogo = null;
 var streamLogo = null;
+var playerFont = null;
 var player1TextPt = {x: 10,	y: 300};
 var player1TextSz = 35;
 var player2TextPt = {x: 10,	y: 800};
@@ -57,48 +58,42 @@ function redrawCanvas(){
 	}
 
 	if(tournamentLogo){
-		drawLogo(tournamentLogo, 'tourney');
+		drawLogo(tournamentLogo, 'tourney', canvas);
 	}
 	if(gameLogo){
-		drawLogo(gameLogo, 'game');
+		drawLogo(gameLogo, 'game', canvas);
 	}
 	if(streamLogo){
-		drawLogo(streamLogo, 'stream');
-	}
-	
-	
-	if(player1){
-		if(nameplateUrl){
-			var side = 'left';
-			var pt = getNameplateMidY(nameplateUrl, canvas, side);
-			drawText(player1, pt.x, pt.y, nameplateTextColor, side);
-		}
-		else{
-			drawText(player1, player1TextPt.x, player1TextPt.y, nameplateTextColor);
-		}
-	}
-	if(player2){
-		if(nameplateUrl){
-			var side = 'right';
-			var pt = getNameplateMidY(nameplateUrl, canvas, side);
-			drawText(player2, pt.x, pt.y, nameplateTextColor, side);
-		}
-		else{
-			drawText(player2, player2TextPt.x, player2TextPt.y, nameplateTextColor);
-		}
-	}
-	if(player3){
-		drawText(player3, player3TextPt.x, player3TextPt.y, nameplateTextColor);
-	}
-	if(player4){
-		drawText(player4, player4TextPt.x, player4TextPt.y, nameplateTextColor);
+		drawLogo(streamLogo, 'stream', canvas);
 	}
 };
 
 function rewriteCanvas(){
 	var canvas = document.getElementById('previewCanvas');
 	var ctx = getCanvas('previewCanvas');
+	var side = 'left';
+	var pt = null;
 	
+	if(player3){
+		if(nameplateUrl){
+			var side = 'left';
+			var pt = getNameplateMidY(nameplateUrl, canvas, side);
+			drawText(player3, pt.x, pt.y, nameplateTextColor, side);
+		}
+		else{
+			drawText(player3, player3TextPt.x, player3TextPt.y, nameplateTextColor);
+		}
+	}
+	if(player4){
+		if(nameplateUrl){
+			side = 'right';
+			pt = getNameplateMidY(nameplateUrl, canvas, side);
+			drawText(player4, pt.x, pt.y, nameplateTextColor, side);
+		}
+		else{
+			drawText(player4, player4TextPt.x, player4TextPt.y, nameplateTextColor);
+		}
+	}
 	if(player1){
 		if(nameplateUrl){
 			var side = 'left';
@@ -110,15 +105,16 @@ function rewriteCanvas(){
 		}
 	}
 	if(player2){
-		drawText(player2, player2TextPt.x, player2TextPt.y, nameplateTextColor);
+		if(nameplateUrl){
+			side = 'right';
+			pt = getNameplateMidY(nameplateUrl, canvas, side);
+			drawText(player2, pt.x, pt.y, nameplateTextColor, side);
+		}
+		else{
+			drawText(player2, player2TextPt.x, player2TextPt.y, nameplateTextColor);
+		}
 	}
-	if(player3){
-		drawText(player3, player3TextPt.x, player3TextPt.y, nameplateTextColor);
-	}
-	if(player4){
-		drawText(player4, player4TextPt.x, player4TextPt.y, nameplateTextColor);
-	}
-}
+};
 
 /** RETURN URL TO IMAGE **/
 function getImagePath(char){
@@ -158,7 +154,59 @@ function handleBackground(e){
     reader.readAsDataURL(e.target.files[0]);     
 };
 
+function handleTourney(e){
+	var ctx = getCanvas('previewCanvas');
+    var reader = new FileReader();
+    reader.onload = function(event){
+        var img = new Image();
+        img.onload = function(){
+        	var canvas = document.getElementById('previewCanvas');
+        	img.width = canvas.width;
+        	img.height = canvas.height;
+        	tournamentLogo = img;
+            redrawCanvas();
+        	//ctx.drawImage(img,0,0, img.width, img.height);
+        }
+        img.src = event.target.result;
+    }
+    reader.readAsDataURL(e.target.files[0]);     
+};
 
+function handleStream(e){
+	var ctx = getCanvas('previewCanvas');
+    var reader = new FileReader();
+    reader.onload = function(event){
+        var img = new Image();
+        img.onload = function(){
+        	var canvas = document.getElementById('previewCanvas');
+        	img.width = canvas.width;
+        	img.height = canvas.height;
+        	streamLogo = img;
+            redrawCanvas();
+        	//ctx.drawImage(img,0,0, img.width, img.height);
+        }
+        img.src = event.target.result;
+    }
+    reader.readAsDataURL(e.target.files[0]);     
+};
+
+function handleGame(e){
+	var ctx = getCanvas('previewCanvas');
+    var reader = new FileReader();
+    reader.onload = function(event){
+        var img = new Image();
+        img.onload = function(){
+        	var canvas = document.getElementById('previewCanvas');
+        	img.width = canvas.width;
+        	img.height = canvas.height;
+        	gameLogo = img;
+            redrawCanvas();
+        	//ctx.drawImage(img,0,0, img.width, img.height);
+        }
+        img.src = event.target.result;
+    }
+    reader.readAsDataURL(e.target.files[0]);     
+};
 
 /** DRAW CHARACTER OR NAMEPLATE ONTO CANVAS **/
 function drawCharacter(imgPath, charNumber){
@@ -202,29 +250,33 @@ function drawNameplate(imgPath, duplicate){
 	}
 };
 
-function drawLogo(logo)
-
-function getNameplateMidY(imgUrl, canvas, side){
-	var img = new Image();
-	img.src = imgUrl;
-	var x = null;
-	var y = null;
-	var justify = null;
-	if(side === 'left')
-		x = 5;
-	else if(side === 'right')
-		x = canvas.width - 5;
+function drawLogo(logoUrl, type, canvas){
+	var x, y;
 	
-	y = (canvas.height) - (img.height/2);		
-	
-	return {x:x, y:y};
-}
-
+	if(logoUrl){
+		if(type === 'game'){
+			x = canvas.width/2;
+			y = canvas.height/5;
+		}
+		else if(type === 'tourney'){
+			x = canvas.width/2;
+			y = canvas.height / 2;
+		}
+		else if(type === 'stream'){
+			x = canvas.width / 2;
+			y = canvas.height - 50;
+		}
+	}
+};
 
 function drawText(text, x, y, color, side){
 	var ctx = getCanvas('previewCanvas');	
 	ctx.fillStyle = color;
-	ctx.font=String(player1TextSz) + 'px Arial';
+	ctx.font="bold " + String(player1TextSz) + 'pt Arial';
+	if(side === 'right')
+		ctx.textAlign='right';
+	else
+		ctx.textAlign='left';
 	ctx.fillText(text, x, y);
 };
 
@@ -242,15 +294,29 @@ function readURL(input) {
     };
     reader.readAsDataURL(input.files[0]);
   }
-}
+};
 
-
-
+function getNameplateMidY(imgUrl, canvas, side){
+	var img = new Image();
+	img.src = imgUrl;
+	var x = null;
+	var y = null;
+	var justify = null;
+	if(side === 'left')
+		x = nameplateX + 5;
+	else if(side === 'right')
+		x = nameplateDupX + img.width - 5;
+	
+	//y = nameplayteY + img.height;		
+	
+	y = canvas.height - 5;
+	
+	return {x:x, y:y};
+};
 
 var loadImageFromFile = function(input){
 	background = new Image();
 	var path = getElementById('bgImageFile').val;
-	//background.src = 
 }
 
 var drawImageOnCanvas = function(canvas, image){
