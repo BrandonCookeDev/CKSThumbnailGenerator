@@ -52,9 +52,11 @@
 					<hr />
 					<h4>Player Information</h4>
 					<span>
-					Player 1: <input type='text' id='player1Textbox' ng-model='player1' />
+					Player 1: <input type='text' id='player1Textbox' ng-model='player1' /> 
+					<select data-ng-repeat="i in 1 .. 100" id='player1FontDropdown' ><option>{{ i }}</option></select>
 					
 					Player 2: <input type='text' id='player2Textbox' ng-model='player2' />
+					<select data-ng-repeat="i in 1 .. 100" id='player2FontDropdown' ><option>{{ i }}</option></select>
 					<br />
 					</span>
 					<span>
@@ -110,6 +112,7 @@
 					Game Logo <input type='file' id='gameLogoFile' onchange='handleGame(this)' />
 					<br />
 					Stream Logo <input type='file' id='streamLogoFile' onchange='handleStream(this)' />
+					<input type='button' id="defaultStreamLogo" value='Default Stream Logo' onclick='drawLogo("/images/stream/cks.png", "stream", document.getElementById("previewCanvas"));' />
 					<br />
 					<hr />
 				</form>
@@ -125,7 +128,7 @@
 				</span>
 				<br /><br />
 				<span>
-					<input type='image' id='downloadBtn' src='/images/misc/download.png' height='150' width='150'/>
+					<input type='image' id='downloadBtn' src='/images/misc/download.png' height='150' width='150' />
 					<!-- <input type='button' id='submitPictureBtn' value='Save' onclick='submitPicture()'/> -->
 					<!-- <input type='button' id='testBtn' value='test' onclick='drawCharacter("/images/Melee/Thumbs/Sheik.png", 1)'/> -->
 				</span>

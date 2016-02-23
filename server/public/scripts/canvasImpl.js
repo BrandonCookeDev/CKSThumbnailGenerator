@@ -252,19 +252,32 @@ function drawNameplate(imgPath, duplicate){
 
 function drawLogo(logoUrl, type, canvas){
 	var x, y;
+	var ctx = getCanvas('previewCanvas');
+
+	var img = new Image();
+	img.src = logoUrl;
 	
 	if(logoUrl){
 		if(type === 'game'){
+			gameLogo = img;
 			x = canvas.width/2;
 			y = canvas.height/5;
 		}
 		else if(type === 'tourney'){
+			tournamentLogo = img;
 			x = canvas.width/2;
 			y = canvas.height / 2;
 		}
 		else if(type === 'stream'){
-			x = canvas.width / 2;
-			y = canvas.height - 50;
+			img.width = 150;
+			img.height = 120;
+			streamLogo = img;
+			x = (canvas.width / 2) - (img.width/2);
+			y = canvas.height - img.height;
+		}
+		img.onload = function(){
+			
+			ctx.drawImage(img, x, y, img.width, img.height);
 		}
 	}
 };
@@ -309,7 +322,7 @@ function getNameplateMidY(imgUrl, canvas, side){
 	
 	//y = nameplayteY + img.height;		
 	
-	y = canvas.height - 5;
+	y = canvas.height - 10;
 	
 	return {x:x, y:y};
 };

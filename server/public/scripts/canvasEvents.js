@@ -129,3 +129,10 @@ $('#downloadBtn').click(function(){
 	var dataUrl = $('#previewCanvas').toDataUrl('image/png');
 	
 });
+
+/*
+$('#defaultStreamLogo').click(function(){
+	var canvas = document.getElementById('previewCanvas');
+	drawLogo('/images/stream/cks.png', 'stream', canvas);
+});
+*/
