@@ -125,10 +125,10 @@ $('#nameplateTextColor').change(function(){
 });
 
 /** DOWNLOAD PICTURE **/
-$('#downloadBtn').click(function(){
-	var dataUrl = $('#previewCanvas').toDataUrl('image/png');
+//$('#downloadBtn').click(function(){
+//	var dataUrl = $('#previewCanvas').toDataUrl('image/png');
 	
-});
+//});
 
 /*
 $('#defaultStreamLogo').click(function(){
