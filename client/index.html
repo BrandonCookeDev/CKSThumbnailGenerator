@@ -102,6 +102,8 @@
 						</option>
 					</select>
 					</span>
+					<br /><br />
+					<span>Tournament Round: <input type='text' id='tournamentRoundText' /></span>
 					<span><br /><input style="{float:right;}" type='button' id='submitTextBtn' value='Submit Names'/></span>
 					
 					<hr />
@@ -112,7 +114,7 @@
 					Game Logo <input type='file' id='gameLogoFile' onchange='handleGame(this)' />
 					<br />
 					Stream Logo <input type='file' id='streamLogoFile' onchange='handleStream(this)' />
-					<input type='button' id="defaultStreamLogo" value='Default Stream Logo' onclick='drawLogo("/images/stream/cks.png", "stream", document.getElementById("previewCanvas"));' />
+					<input type='button' id="defaultStreamLogoBtn" value='Default Stream Logo' onclick='drawLogo("/images/stream/cks.png", "stream", document.getElementById("previewCanvas"));' />
 					<br />
 					<hr />
 				</form>

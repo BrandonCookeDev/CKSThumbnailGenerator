@@ -1,3 +1,7 @@
+/** SET THE TOURNAMENT ROUND ON CHANGE **/
+$('#tournamentRoundText').change(function(){
+	tounamentRound = $(this).val();
+});
 
 /** SET CANVAS SIZE BOXES **/
 $('#customWidthBox').val($('#previewCanvas').width());
@@ -53,10 +57,17 @@ $('#player4Textbox').on('input',function(){
 });
 
 
+/** DEFAULTS **/
 $('#defaultPlatesBtn').click(function(){
 	var path = getNameplatesPath('Default Nameplate');
 	nameplateUrl = path;
 	drawNameplate(path, true);
+});
+
+$('#defaultStreamLogoBtn').click(function(){
+	var path = getNameplatesPath('cks');
+	streamLogo = path;
+	drawLogo(path, 'stream');
 });
 
 /** CHANGE TEXT COLOR **/
@@ -64,6 +75,11 @@ $('#nameplateTextColor').on('input', function(){
 	nameplateTextColor = $(this).val();
 });
 
+$('#defaultStreamLogo').click(function(){
+	var canvas = document.getElementById('previewCanvas');	
+	streamLogo = '/images/stream/cks.png';
+	drawLogo(streamLogo, 'stream', canvas);
+});
 
 /** EVENT LISTENERS FOR DROPDOWNS **/
 $('#player1CharacterDropdown').change(function(){

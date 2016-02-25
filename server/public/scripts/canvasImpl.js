@@ -14,6 +14,7 @@ var player1 = null;
 var player2 = null;
 var player3 = null;
 var player4 = null;
+var tournamentRound = null;
 var tournamentLogo = null;
 var gameLogo = null;
 var streamLogo = null;
@@ -58,13 +59,17 @@ function redrawCanvas(){
 	}
 
 	if(tournamentLogo){
-		drawLogo(tournamentLogo, 'tourney', canvas);
+		drawLogo(tournamentLogo, 'tourney');
 	}
 	if(gameLogo){
-		drawLogo(gameLogo, 'game', canvas);
+		drawLogo(gameLogo, 'game');
 	}
 	if(streamLogo){
-		drawLogo(streamLogo, 'stream', canvas);
+		try{
+			drawLogo(streamLogo, 'stream');
+		}catch(err){
+			console.log(err);
+		}
 	}
 };
 
@@ -250,35 +255,31 @@ function drawNameplate(imgPath, duplicate){
 	}
 };
 
-function drawLogo(logoUrl, type, canvas){
+function drawLogo(logoUrl, type){
 	var x, y;
+	var canvas = document.getElementById('previewCanvas');
 	var ctx = getCanvas('previewCanvas');
-
 	var img = new Image();
 	img.src = logoUrl;
-	
-	if(logoUrl){
-		if(type === 'game'){
-			gameLogo = img;
-			x = canvas.width/2;
-			y = canvas.height/5;
-		}
-		else if(type === 'tourney'){
-			tournamentLogo = img;
-			x = canvas.width/2;
-			y = canvas.height / 2;
-		}
-		else if(type === 'stream'){
-			img.width = 150;
-			img.height = 120;
-			streamLogo = img;
-			x = (canvas.width / 2) - (img.width/2);
-			y = canvas.height - img.height;
-		}
-		img.onload = function(){
-			
-			ctx.drawImage(img, x, y, img.width, img.height);
-		}
+	if(type === 'game'){
+		gameLogo = img;
+		x = canvas.width/2;
+		y = canvas.height/5;
+	}
+	else if(type === 'tourney'){
+		tournamentLogo = img;
+		x = canvas.width/2;
+		y = canvas.height / 2;
+	}
+	else if(type === 'stream'){
+		img.width = 150;
+		img.height = 120;
+		streamLogo = img;
+		x = (canvas.width / 2) - (img.width/2);
+		y = canvas.height - img.height;
+	}
+	img.onload = function(){
+		ctx.drawImage(img, x, y, img.width, img.height);
 	}
 };
 
@@ -348,7 +349,7 @@ function downloadCanvas(link, canvasId, filename) {
 }
 
 var loadImageFromFile = function(input){
-	background = new Image();
+	background = new Image(); //8000 bits 100000
 	var path = getElementById('bgImageFile').val;
 }
 
