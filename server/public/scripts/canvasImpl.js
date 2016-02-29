@@ -160,6 +160,7 @@ function handleBackground(e){
 };
 
 function handleTourney(e){
+	var canvas = document.getElementById('previewCanvas');
 	var ctx = getCanvas('previewCanvas');
     var reader = new FileReader();
     reader.onload = function(event){
@@ -170,7 +171,7 @@ function handleTourney(e){
         	img.height = canvas.height;
         	tournamentLogo = img;
             redrawCanvas();
-        	//ctx.drawImage(img,0,0, img.width, img.height);
+        	ctx.drawImage(img, canvas.width/2 - img.width/2, img.height/2);
         }
         img.src = event.target.result;
     }
@@ -178,6 +179,7 @@ function handleTourney(e){
 };
 
 function handleStream(e){
+	var canvas = document.getElementById('previewCanvas');
 	var ctx = getCanvas('previewCanvas');
     var reader = new FileReader();
     reader.onload = function(event){
@@ -188,7 +190,9 @@ function handleStream(e){
         	img.height = canvas.height;
         	streamLogo = img;
             redrawCanvas();
-        	//ctx.drawImage(img,0,0, img.width, img.height);
+            x = (canvas.width / 2) - (img.width/2);
+    		y = canvas.height - img.height;
+        	ctx.drawImage(img, x, y);
         }
         img.src = event.target.result;
     }
@@ -262,19 +266,19 @@ function drawLogo(logoUrl, type){
 	var img = new Image();
 	img.src = logoUrl;
 	if(type === 'game'){
-		gameLogo = img;
+		gameLogo = img.src;
 		x = canvas.width/2;
 		y = canvas.height/5;
 	}
 	else if(type === 'tourney'){
-		tournamentLogo = img;
+		tournamentLogo = img.src;
 		x = canvas.width/2;
 		y = canvas.height / 2;
 	}
 	else if(type === 'stream'){
 		img.width = 150;
 		img.height = 120;
-		streamLogo = img;
+		streamLogo = img.src;
 		x = (canvas.width / 2) - (img.width/2);
 		y = canvas.height - img.height;
 	}
