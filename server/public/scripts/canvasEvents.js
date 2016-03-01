@@ -1,7 +1,9 @@
 /** SET THE TOURNAMENT ROUND ON CHANGE **/
-$('#tournamentRoundText').change(function(){
-	tounamentRound = $(this).val();
+$('#tournamentRoundText').on('input', function(){
+	tournamentRound = $(this).val();
 });
+
+tournamentRound = $('#tournamentRoundText').val();
 
 /** SET CANVAS SIZE BOXES **/
 $('#customWidthBox').val($('#previewCanvas').width());
@@ -75,6 +77,19 @@ $('#nameplateTextColor').on('input', function(){
 	nameplateTextColor = $(this).val();
 });
 
+$('#roundColor').on('input', function(){
+	tournamentRoundColor = $(this).val();
+});
+
+/** COLOR PICKER CHANGES **/
+$('#nameplateTextColor').change(function(){
+	rewriteCanvas();
+});
+
+$('#roundColor').change(function(){
+	rewriteCanvas();
+});
+
 $('#defaultStreamLogo').click(function(){
 	var canvas = document.getElementById('previewCanvas');	
 	streamLogo = '/images/stream/cks.png';
@@ -135,10 +150,28 @@ $('#submitTextBtn').click('input', function(){
 	rewriteCanvas();
 });
 
-/** COLOR PICKER CHANGES **/
-$('#nameplateTextColor').change(function(){
-	rewriteCanvas();
+
+$('#tournamentLogoFile').change(function(e) {
+    var file = e.target.files[0],
+        imageType = /image.*/;
+
+    if (!file.type.match(imageType))
+        return;
+
+    var reader = new FileReader();
+    reader.onload = fileOnload;
+    reader.readAsDataURL(file);        
 });
+
+function fileOnload(e) {
+    var $img = $('<img>', { src: e.target.result });
+    var canvas = $('#previewCanvas')[0];
+    var context = canvas.getContext('2d');
+
+    $img.load(function() {
+        context.drawImage(this, canvas.width/2 + $img.width/2, canvas.height*(3/4));
+    });
+}
 
 /** DOWNLOAD PICTURE **/
 //$('#downloadBtn').click(function(){

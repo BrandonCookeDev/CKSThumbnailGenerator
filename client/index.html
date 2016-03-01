@@ -45,12 +45,15 @@
 					Background Image: <input type='file' id='bgImageFile' value='Browse' onchange='handleBackground(this)'/>
 					<br />
 					Nameplate Image: <i>(Coming Soon)</i> <input type='file' id='nameplateFile' /> <input value='default nameplate' type='button' id='defaultPlatesBtn' />
-					Font Color<input type='color' id='nameplateTextColor' />
+					
 					<br />
 					Duplicate Copy on Other Side? <input type='checkbox' id='duplicateNameplateCheck' />
 					
 					<hr />
 					<h4>Player Information</h4>
+					<span>Font Color<input type='color' id='nameplateTextColor' /></span>
+					<br/>
+					<br/>
 					<span>
 					Player 1: <input type='text' id='player1Textbox' ng-model='player1' /> 
 					<select data-ng-repeat="i in 1 .. 100" id='player1FontDropdown' ><option>{{ i }}</option></select>
@@ -103,13 +106,13 @@
 					</select>
 					</span>
 					<br /><br />
-					<span>Tournament Round: <input type='text' id='tournamentRoundText' /></span>
+					<span>Tournament Round: <input type='text' id='tournamentRoundText' /> <input type='color' id='roundColor'/></span> 
 					<span><br /><input style="{float:right;}" type='button' id='submitTextBtn' value='Submit Names'/></span>
 					
 					<hr />
 					<h4>Extras</h4>
 					<br />
-					Tournament Logo <input type='file' id='tournamentLogoFile' onchange='handleTourney(this)'/>
+					Tournament Logo <input type='file' id='tournamentLogoFile'/>
 					<br />
 					Game Logo <input type='file' id='gameLogoFile' onchange='handleGame(this)' />
 					<br />
