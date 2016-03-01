@@ -136,7 +136,9 @@ function rewriteCanvas(){
 };
 
 /** RETURN URL TO IMAGE **/
-function getImagePath(char){
+function getImagePath(char, side){
+	if(side === 'right')
+		return 'images/Melee/Thumbs/'char+'Reverse.png'	
 	return '/images/Melee/Thumbs/'+char+'.png';
 }
 function getNameplatesPath(plate){
