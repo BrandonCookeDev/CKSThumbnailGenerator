@@ -116,7 +116,7 @@ $('#player2CharacterDropdown').change(function(){
 		redrawCanvas();
 	}
 	else{
-		char2url = getImagePath(char.val().replace(" ", ""));	
+		char2url = getImagePath(char.val().replace(" ", ""), 'right');	
 		redrawCanvas();
 	}
 });
@@ -140,7 +140,7 @@ $('#player4CharacterDropdown').change(function(){
 		redrawCanvas();
 	}
 	else{
-		char4url = getImagePath(char.val().replace(" ", ""));
+		char4url = getImagePath(char.val().replace(" ", ""), 'right');
 		redrawCanvas();
 	}
 });
