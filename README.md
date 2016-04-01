@@ -8,8 +8,8 @@
  * HTML 5
  * CSS
  * Javascript
- ** JQuery
- ** AngularJS
+ 	* JQuery
+ 	* AngularJS
  
 ### Instructions
  * Download Node JS from the link above.
