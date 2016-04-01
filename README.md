@@ -39,5 +39,9 @@
  	* Click Default Stream Logo
  	* OPTIONAL: Choose a game logo (THIS NEEDS TO WORK)
  	* Click arrow below picture to download.
+ 	
+### MAJOR NOTE:
+ * You may have to click things like "Default Nameplate" and "Default Stream Logo" in order to repaint them over things again so they show up in front.
+ * Also you may have to resubmit names if you choose things like different characters and etc.
  	 
  
