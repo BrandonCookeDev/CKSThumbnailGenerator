@@ -2,7 +2,7 @@
 ## Clash King Studios Youtube Thumbnail Generator
 
 ### Required Software
- * Node JS [Click to go to site](https://https://nodejs.org/en/)
+ * Node JS [Click to go to site](https://nodejs.org/en/)
  
 ### Languages Used
  * HTML 5
