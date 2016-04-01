@@ -23,3 +23,21 @@
  		* "node app.js"
  * The above command should host the application on localhost:1337. Just Open Chrome and type that in, and you will go to the app.
  
+### Using the App
+ * The app mostly is supposed to be like a workflow where you go down in steps. 
+ * However there are definitely a few bugs that need to be sorted out after we get a working build out first.
+ * Steps for Singles Matches:
+ 	* First choose a background image file. It will populate in the HTML canvas.
+ 	* Next choose the characters the players in the match selected.
+ 	* After this, click "Default Nameplate" twice.
+ 		* This is temporary until we get Custom Nameplate functionality working,
+ 	* Once then, type the names into the boxes
+ 	* Type the tournament round into the box
+ 	* Select the text's color with the color pickers
+ 	* Click submit names
+ 	* Choose a tournament logo file (THIS NEEDS TO WORK)
+ 	* Click Default Stream Logo
+ 	* OPTIONAL: Choose a game logo (THIS NEEDS TO WORK)
+ 	* Click arrow below picture to download.
+ 	 
+ 
