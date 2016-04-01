@@ -260,13 +260,20 @@ function drawNameplate(imgPath, duplicate){
 	img.src = imgPath;
 	img.onload = function(){
 		nameplateX = 0
-		nameplateY = canvas.height - img.height;
 		
 		var temp = img.src;
 		var imgRev = new Image();
 		imgRev.src = temp.substring(0, temp.indexOf('.png')) + ' Reverse.png';
+		
+		/** NAMEPLATES AT TOP **/
+		nameplateY = 0
 		nameplateDupX = canvas.width - imgRev.width;
-		nameplateDupY = canvas.height - imgRev.height;
+		nameplateDupY = 0;
+		
+		/** NAMEPLATES AT BOTTOM **/
+		//nameplateY = canvas.height - img.height;
+		//nameplateDupX = canvas.width - imgRev.width;
+		//nameplateDupY = canvas.height - imgRev.height;
 		
 		ctx.drawImage(img, nameplateX, nameplateY );
 		ctx.drawImage(imgRev, nameplateDupX, nameplateDupY);
@@ -293,8 +300,14 @@ function drawLogo(logoUrl, type){
 		img.width = 150;
 		img.height = 120;
 		streamLogo = img.src;
+		
+		/** LOGO AT THE TOP **/
 		x = (canvas.width / 2) - (img.width/2);
-		y = canvas.height - img.height;
+		y = -10; //img.height;
+		
+		/** LOGO AT THE BOTTOM **/
+		//x = (canvas.width / 2) - (img.width/2);
+		//y = canvas.height - img.height;
 	}
 	img.onload = function(){
 		ctx.drawImage(img, x, y, img.width, img.height);
@@ -341,7 +354,13 @@ function getNameplateMidY(imgUrl, canvas, side){
 	
 	//y = nameplayteY + img.height;		
 	
-	y = canvas.height - 10;
+	//The following needs to programmatically find the nameplates	
+	/** NAMEPLATES ON TOP **/
+	y = 34;
+	
+	/** NAMEPLATES ON BOTTOM **/
+	//y = canvas.height - 10;
+	
 	
 	return {x:x, y:y};
 };
