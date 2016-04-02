@@ -124,13 +124,21 @@ function rewriteCanvas(){
 	}
 	
 	if(tournamentRound){
+		
+		//Draw rectangle container
+		ctx.fillStyle = "grey";
+		ctx.fillRect(0, canvas.height - 80, canvas.width, canvas.height);
+		
+
 		if(tournamentRoundColor)
 			ctx.fillStyle = tournamentRoundColor;
 		else ctx.fillStyle = 'white';
-		ctx.font='bold ' + String(tournamentRountFontSz)  + ' pt Impact';
+
+		//ctx.font='bold ' + String(tournamentRountFontSz)  + ' pt Impact';
+		ctx.font = 'bold 80 pt Impact';
 		ctx.textAlign='center';
 		x = canvas.width/2
-		y = canvas.height * (3/4);
+		y = canvas.height - 50 * (1/2);
 		ctx.fillText(tournamentRound, x, y);		
 	}
 };
