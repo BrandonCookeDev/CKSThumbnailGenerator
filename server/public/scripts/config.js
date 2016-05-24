@@ -1,8 +1,8 @@
 var canvas = null;
 var p1x = 0; var p1y = 50;
 var p2x = null; var p2y = 50;
-var p3x = 20; var p3y = 30;
-var p4x = null; var p4y = 30;
+var p3x = 25; var p3y = 50;
+var p4x = null; var p4y = 50;
 
 var getCharacterCoordinates = function(canvas, image, characterNumber){
 	this.canvas = canvas;

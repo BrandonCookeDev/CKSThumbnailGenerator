@@ -133,7 +133,7 @@ $('#player3CharacterDropdown').change(function(){
 		redrawCanvas();
 	}
 	else{
-		char3url = getImagePath(char.val().replace(" ", ""), false);
+		char3url = getImagePath(char.val().replace(" ", ""), true);
 		redrawCanvas();
 	}
 });
@@ -145,7 +145,7 @@ $('#player4CharacterDropdown').change(function(){
 		redrawCanvas();
 	}
 	else{
-		char4url = getImagePath(char.val().replace(" ", ""), 'right', false);
+		char4url = getImagePath(char.val().replace(" ", ""), 'right', true);
 		redrawCanvas();
 	}
 });
