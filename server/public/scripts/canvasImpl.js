@@ -267,24 +267,28 @@ function drawCharacter(imgPath, charNumber){
 	var canvas = document.getElementById('previewCanvas');
 	var ctx = getCanvas('previewCanvas');
 	var img = new Image();
-	var width = 0;
-	var height = 0;
+	var width = 0, height = 0;
+	var yDiff = 0, xDiff = 0;
+	var reduce = .9;
 	img.src = imgPath;
 	img.onload = function(){	
 		var coords = getCharacterCoordinates(canvas, img, charNumber);
 		if(charNumber === 1)
 			if(!isSingles()){
-				width = img.width * .7;
-				height = img.height * .7;
-				ctx.drawImage(img, coords.x, coords.y, width, height);
+				width = img.width * reduce;
+				height = img.height * reduce;
+				yDiff = difference(img.height, height);
+				ctx.drawImage(img, coords.x, coords.y + yDiff, width, height);
 			}
 			else
 				ctx.drawImage(img, coords.x, coords.y);				
 		else if(charNumber === 2){
 			if(!isSingles()){
-				width = img.width * .7;
-				height = img.height * .7;
-				ctx.drawImage(img, coords.x, coords.y, width, height);
+				width = img.width * reduce;
+				height = img.height * reduce;
+				xDiff = difference(img.width, width);
+				yDiff = difference(img.height, height);
+				ctx.drawImage(img, coords.x + xDiff, coords.y + yDiff, width, height);
 			}
 			else
 				//ctx.scale(-1, 1);
@@ -454,4 +458,9 @@ function sleep(delay) {
     while (new Date().getTime() < start + delay);
   }
 
+function difference(a, b){
+	if(a > b)
+		return a - b;
+	else return b - a;
+}
 
