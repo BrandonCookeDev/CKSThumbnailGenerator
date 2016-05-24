@@ -65,7 +65,7 @@
 					</span>
 					<span>
 					Character 1:
-					<select id='player1CharacterDropdown'>
+					<select id='player1CharacterDropdown' class='character_dropdown'>
 						<option ng-repeat='character in characters' value='{{character}}' 
 							ng-model='character1' id='character1' >
 							{{character}}
@@ -73,7 +73,7 @@
 					</select>
 					
 					Character 2:
-					<select id='player2CharacterDropdown'>
+					<select id='player2CharacterDropdown' class='character_dropdown'>
 						<option ng-repeat='character in characters' value='{{character}}' 
 							ng-model='character2' id='character2' >
 							{{character}}
@@ -91,7 +91,7 @@
 					</span>
 					<span>
 					Character 3:
-					<select id='player3CharacterDropdown'>
+					<select id='player3CharacterDropdown' class='character_dropdown'>
 						<option ng-repeat='character in characters' value='{{character}}' 
 							ng-model='character3' id='character3' >
 							{{character}}
@@ -99,7 +99,7 @@
 					</select>
 					
 					Character 4:
-					<select id='player4CharacterDropdown'>
+					<select id='player4CharacterDropdown' class='character_dropdown'>
 						<option ng-repeat='character in characters' value='{{character}}' 
 							ng-model='character4' id='character4' >
 							{{character}}
@@ -108,6 +108,7 @@
 					</span>
 					<br /><br />
 					<span>Tournament Round: <input type='text' id='tournamentRoundText' /> <input type='color' id='roundColor'/></span> 
+					<span><br />Date:<input type='date' id='tourneyDate' /></span>
 					<span><br /><input style="{float:right;}" type='button' id='submitTextBtn' value='Submit Names'/></span>
 					
 					<hr />

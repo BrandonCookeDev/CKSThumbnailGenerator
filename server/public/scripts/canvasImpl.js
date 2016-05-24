@@ -22,16 +22,31 @@ var gameLogo = null;
 var streamLogo = null;
 var playerFont = null;
 var player1TextPt = {x: 10,	y: 300};
-var player1TextSz = 35;
+var player1TextSz = 33;
 var player2TextPt = {x: 10,	y: 800};
-var player2TextSz = 35;
+var player2TextSz = 33;
 var player3TextPt = {x: 10,	y: 800};
-var player3TextSz = 35;
+var player3TextSz = 33;
 var player4TextPt = {x: 10,	y: 800};
-var player4TextSz = 35;
+var player4TextSz = 33;
 var nameplateTextColor = null;
+var tournamentDate = null;
 
 var duplicateNameplate = false;
+
+/** GENERAL FUNCTIONS **/
+function countCharacterDropdowns(){
+	var sum = 0;
+	$('.character_dropdown').each(function(){
+		if($(this).val() != 'Choose One')
+			sum++;
+	});
+	return sum;
+}
+function isSingles(){
+	var ret = countCharacterDropdowns() > 2 ? false : true;
+	return ret;
+}
 
 /** REDRAW THE IMAGE **/
 function redrawCanvas(){
@@ -135,24 +150,32 @@ function rewriteCanvas(){
 		else ctx.fillStyle = 'white';
 
 		//ctx.font='bold ' + String(tournamentRountFontSz)  + ' pt Impact';
-		ctx.font = 'bold 80 pt Impact';
+		ctx.font = 'bold 50pt Georgia';
 		ctx.textAlign='center';
 		x = canvas.width/2
-		y = canvas.height - 50 * (1/2);
+		y = canvas.height - 50 * (1/2) + 10;
 		ctx.fillText(tournamentRound, x, y);		
 	}
 };
 
 /** RETURN URL TO IMAGE **/
-function getImagePath(char, side){
-	if(side === 'right')
-		return 'images/Melee/Thumbs/'+char+'Reverse.png'	
-	return '/images/Melee/Thumbs/'+char+'.png';
+function getImagePath(char, side, isSingles){
+	if(isSingles){
+		if(side === 'right')
+			return 'images/Melee/Thumbs/'+char+'Reverse.png'	
+		return '/images/Melee/Thumbs/'+char+'.png';
+	}
+	else{
+		if(side === 'right')
+			return 'images/Melee/Thumbs/'+char+'ReverseDoubles.png'
+		return '/images/Melee/Thumbs/'+char+'Doubles.png'
+	}
 }
 function getNameplatesPath(plate){
 	var path = '/images/nameplates/'
 	return path+plate+'.png';
 }
+
 
 /** RETURN THE CONTEXT OF THE CAVAS BELONGING TO THE ID **/
 function getCanvas(canvasId){
@@ -244,15 +267,28 @@ function drawCharacter(imgPath, charNumber){
 	var canvas = document.getElementById('previewCanvas');
 	var ctx = getCanvas('previewCanvas');
 	var img = new Image();
+	var width = 0;
+	var height = 0;
 	img.src = imgPath;
 	img.onload = function(){	
 		var coords = getCharacterCoordinates(canvas, img, charNumber);
 		if(charNumber === 1)
-			ctx.drawImage(img, coords.x, coords.y);				
+			if(!isSingles()){
+				width = img.width * .7;
+				height = img.height * .7;
+				ctx.drawImage(img, coords.x, coords.y, width, height);
+			}
+			else
+				ctx.drawImage(img, coords.x, coords.y);				
 		else if(charNumber === 2){
-			
-			//ctx.scale(-1, 1);
-			ctx.drawImage(img, coords.x, coords.y);
+			if(!isSingles()){
+				width = img.width * .7;
+				height = img.height * .7;
+				ctx.drawImage(img, coords.x, coords.y, width, height);
+			}
+			else
+				//ctx.scale(-1, 1);
+				ctx.drawImage(img, coords.x, coords.y);
 		}
 		else if(charNumber === 3)
 			ctx.drawImage(img, coords.x, coords.y);				
@@ -417,4 +453,5 @@ function sleep(delay) {
     var start = new Date().getTime();
     while (new Date().getTime() < start + delay);
   }
+
 

@@ -1,3 +1,6 @@
+/** SET THE TOURNAMENT DATE **/
+
+
 /** SET THE TOURNAMENT ROUND ON CHANGE **/
 $('#tournamentRoundText').on('input', function(){
 	tournamentRound = $(this).val();
@@ -83,10 +86,12 @@ $('#roundColor').on('input', function(){
 
 /** COLOR PICKER CHANGES **/
 $('#nameplateTextColor').change(function(){
+	nameplateTextColor = $(this).val();
 	rewriteCanvas();
 });
 
 $('#roundColor').change(function(){
+	tournamentRoundColor = $(this).val();
 	rewriteCanvas();
 });
 
@@ -104,7 +109,7 @@ $('#player1CharacterDropdown').change(function(){
 		redrawCanvas();
 	}
 	else{
-		char1url = getImagePath(char.val().replace(" ", ""));
+		char1url = getImagePath(char.val().replace(" ", ""), null, true);
 		redrawCanvas();
 	}
 });
@@ -116,7 +121,7 @@ $('#player2CharacterDropdown').change(function(){
 		redrawCanvas();
 	}
 	else{
-		char2url = getImagePath(char.val().replace(" ", ""), 'right');	
+		char2url = getImagePath(char.val().replace(" ", ""), 'right', true);	
 		redrawCanvas();
 	}
 });
@@ -128,7 +133,7 @@ $('#player3CharacterDropdown').change(function(){
 		redrawCanvas();
 	}
 	else{
-		char3url = getImagePath(char.val().replace(" ", ""));
+		char3url = getImagePath(char.val().replace(" ", ""), false);
 		redrawCanvas();
 	}
 });
@@ -140,7 +145,7 @@ $('#player4CharacterDropdown').change(function(){
 		redrawCanvas();
 	}
 	else{
-		char4url = getImagePath(char.val().replace(" ", ""), 'right');
+		char4url = getImagePath(char.val().replace(" ", ""), 'right', false);
 		redrawCanvas();
 	}
 });
