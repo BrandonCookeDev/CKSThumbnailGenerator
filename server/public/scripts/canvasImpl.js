@@ -141,16 +141,17 @@ function rewriteCanvas(){
 	if(tournamentRound){
 		
 		//Draw rectangle container
+		ctx.globalAlpha=0.7;
 		ctx.fillStyle = "grey";
 		ctx.fillRect(0, canvas.height - 80, canvas.width, canvas.height);
-		
+		ctx.globalAlpha=1.0;
 
 		if(tournamentRoundColor)
 			ctx.fillStyle = tournamentRoundColor;
 		else ctx.fillStyle = 'white';
 
 		//ctx.font='bold ' + String(tournamentRountFontSz)  + ' pt Impact';
-		ctx.font = 'bold 50pt Georgia';
+		ctx.font = 'bold 50pt Arial';
 		ctx.textAlign='center';
 		x = canvas.width/2
 		y = canvas.height - 50 * (1/2) + 10;
@@ -159,18 +160,13 @@ function rewriteCanvas(){
 };
 
 /** RETURN URL TO IMAGE **/
-function getImagePath(char, side, isSingles){
-	if(isSingles){
-		if(side === 'right')
-			return 'images/Melee/Thumbs/'+char+'Reverse.png'	
-		return '/images/Melee/Thumbs/'+char+'.png';
-	}
-	else{
-		if(side === 'right')
-			return 'images/Melee/Thumbs/'+char+'ReverseDoubles.png'
-		return '/images/Melee/Thumbs/'+char+'Doubles.png'
-	}
+function getImagePath(char, side){
+	if(side === 'right')
+		return 'images/Melee/Thumbs/'+char+'Reverse.png'	
+	return '/images/Melee/Thumbs/'+char+'.png';
+	
 }
+
 function getNameplatesPath(plate){
 	var path = '/images/nameplates/'
 	return path+plate+'.png';
@@ -269,35 +265,29 @@ function drawCharacter(imgPath, charNumber){
 	var img = new Image();
 	var width = 0, height = 0;
 	var yDiff = 0, xDiff = 0;
+	var enhance = 1.15;
 	var reduce = .9;
 	img.src = imgPath;
-	img.onload = function(){	
+	img.onload = function(){
+		height = img.height;
+		width = img.width;
+		
+		if(enhance){
+			height *= enhance;
+			width *= enhance;
+		}
+		
 		var coords = getCharacterCoordinates(canvas, img, charNumber);
 		if(charNumber === 1)
-			if(!isSingles()){
-				width = img.width * reduce;
-				height = img.height * reduce;
-				yDiff = difference(img.height, height);
-				ctx.drawImage(img, coords.x, coords.y + yDiff, width, height);
-			}
-			else
-				ctx.drawImage(img, coords.x, coords.y);				
+			ctx.drawImage(img, coords.x, coords.y, width, height);				
 		else if(charNumber === 2){
-			if(!isSingles()){
-				width = img.width * reduce;
-				height = img.height * reduce;
-				xDiff = difference(img.width, width);
-				yDiff = difference(img.height, height);
-				ctx.drawImage(img, coords.x + xDiff, coords.y + yDiff, width, height);
-			}
-			else
-				//ctx.scale(-1, 1);
-				ctx.drawImage(img, coords.x, coords.y);
+			//ctx.scale(-1, 1);
+			ctx.drawImage(img, coords.x, coords.y, width, height);
 		}
 		else if(charNumber === 3)
-			ctx.drawImage(img, coords.x, coords.y);				
+			ctx.drawImage(img, coords.x, coords.y, width, height);				
 		else if(charNumber === 4)
-			ctx.drawImage(img, coords.x, coords.y);
+			ctx.drawImage(img, coords.x, coords.y, width, height);
 	}
 };
 
