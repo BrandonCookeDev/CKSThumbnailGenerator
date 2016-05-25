@@ -272,7 +272,7 @@ function drawCharacter(imgPath, charNumber){
 		height = img.height;
 		width = img.width;
 		
-		if(enhance){
+		if(enhance && isSingles()){
 			height *= enhance;
 			width *= enhance;
 		}
