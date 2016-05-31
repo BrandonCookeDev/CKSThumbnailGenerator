@@ -265,7 +265,7 @@ function drawCharacter(imgPath, charNumber){
 	var img = new Image();
 	var width = 0, height = 0;
 	var yDiff = 0, xDiff = 0;
-	var enhance = 1.15;
+	var enhance = 1.5;
 	var reduce = .9;
 	img.src = imgPath;
 	img.onload = function(){

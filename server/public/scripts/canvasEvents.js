@@ -97,7 +97,7 @@ $('#roundColor').change(function(){
 
 $('#defaultStreamLogo').click(function(){
 	var canvas = document.getElementById('previewCanvas');	
-	streamLogo = '/images/stream/cks.png';
+	streamLogo = '/server/images/stream/cksbold.png';
 	drawLogo(streamLogo, 'stream', canvas);
 });
 
