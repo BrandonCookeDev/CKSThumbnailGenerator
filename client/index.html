@@ -10,14 +10,14 @@
 				overflow:hidden;
 			}
 			div.form{
-				width:28%;				
+				width:35%;				
 				float:left;
 				background-color:#bfbfbf;
 				border: 2px solid black;	
 			}
 			div.preview{
 				text-align:center;
-				width:68%;			
+				width:65%;			
 				background-color:#a6a6a6;
 				border: 2px solid black;
 				float:left;
@@ -48,7 +48,7 @@
 					<input value='default nameplate' type='button' id='defaultPlatesBtn' />
 					
 					<br />
-					Duplicate Copy on Other Side? <input type='checkbox' id='duplicateNameplateCheck' />
+					Duplicate Copy on Other Side? <i>(Coming Soon)</i> <input type='checkbox' id='duplicateNameplateCheck' />
 					
 					<hr />
 					<h4>Player Information</h4>
@@ -56,57 +56,54 @@
 					<br/>
 					<br/>
 					<span>
-					Player 1: <input type='text' id='player1Textbox' ng-model='player1' /> 
-					<select data-ng-repeat="i in 1 .. 100" id='player1FontDropdown' ><option>{{ i }}</option></select>
-					
-					Player 2: <input type='text' id='player2Textbox' ng-model='player2' />
-					<select data-ng-repeat="i in 1 .. 100" id='player2FontDropdown' ><option>{{ i }}</option></select>
-					<br />
+						<div>
+							Player 1: <input type='text' id='player1Textbox' ng-model='player1' hint='Team 1'/> 
+							<!-- <select data-ng-repeat="i in 1 .. 100" id='player1FontDropdown' ><option>{{ i }}</option></select><br />-->
+							Character 1:
+							<select id='player1CharacterDropdown' class='character_dropdown'>
+								<option ng-repeat='character in characters' value='{{character}}' 
+									ng-model='character1' id='character1' >
+									{{character}}
+								</option>
+							</select>
+						</div>
+						<div>
+							Player 2: <input type='text' id='player2Textbox' ng-model='player2' hint='Team 2'/>
+							<!-- <select data-ng-repeat="i in 1 .. 100" id='player2FontDropdown' ><option>{{ i }}</option></select><br /> -->
+							Character 2:
+							<select id='player2CharacterDropdown' class='character_dropdown'>
+								<option ng-repeat='character in characters' value='{{character}}' 
+									ng-model='character2' id='character2' >
+									{{character}}
+								</option>
+							</select>
+						</div>
 					</span>
+					<br />			
 					<span>
-					Character 1:
-					<select id='player1CharacterDropdown' class='character_dropdown'>
-						<option ng-repeat='character in characters' value='{{character}}' 
-							ng-model='character1' id='character1' >
-							{{character}}
-						</option>
-					</select>
-					
-					Character 2:
-					<select id='player2CharacterDropdown' class='character_dropdown'>
-						<option ng-repeat='character in characters' value='{{character}}' 
-							ng-model='character2' id='character2' >
-							{{character}}
-						</option>
-					</select>
+						<div>
+							Player 3: <input type='text' id='player3Textbox' ng-model='player3' hint='Team 1' />
+							Character 3:
+							<select id='player3CharacterDropdown' class='character_dropdown'>
+								<option ng-repeat='character in characters' value='{{character}}' 
+									ng-model='character3' id='character3' >
+									{{character}}
+								</option>
+							</select>
+						</div>
+						<div>
+							Player 4: <input type='text' id='player4Textbox' ng-model='player4' hint='Team 2' />
+							Character 4:
+							<select id='player4CharacterDropdown' class='character_dropdown'>
+								<option ng-repeat='character in characters' value='{{character}}' 
+									ng-model='character4' id='character4' >
+									{{character}}
+								</option>
+							</select>
+						</div>
 					</span>					
 					<br />
-					<br />					
-					<span>
-					Player 3: <input type='text' id='player3Textbox' ng-model='player3' />
-					
-					Player 4: <input type='text' id='player4Textbox' ng-model='player4' />
 					<br />
-					<br />
-					</span>
-					<span>
-					Character 3:
-					<select id='player3CharacterDropdown' class='character_dropdown'>
-						<option ng-repeat='character in characters' value='{{character}}' 
-							ng-model='character3' id='character3' >
-							{{character}}
-						</option>
-					</select>
-					
-					Character 4:
-					<select id='player4CharacterDropdown' class='character_dropdown'>
-						<option ng-repeat='character in characters' value='{{character}}' 
-							ng-model='character4' id='character4' >
-							{{character}}
-						</option>
-					</select>
-					</span>
-					<br /><br />
 					<span>Tournament Round: <input type='text' id='tournamentRoundText' /> <input type='color' id='roundColor'/></span> 
 					<span><br />Date:<input type='date' id='tourneyDate' /></span>
 					<span><br /><input style="{float:right;}" type='button' id='submitTextBtn' value='Submit Names'/></span>
@@ -114,12 +111,13 @@
 					<hr />
 					<h4>Extras</h4>
 					<br />
-					Tournament Logo <input type='file' id='tournamentLogoFile'/>
-					<br />
-					Game Logo <input type='file' id='gameLogoFile' onchange='handleGame(this)' />
-					<br />
 					Stream Logo <input type='file' id='streamLogoFile' onchange='handleStream(this)' />
 					<input type='button' id="defaultStreamLogoBtn" value='Default Stream Logo' onclick='drawLogo("/images/stream/cksbold.png", "stream", document.getElementById("previewCanvas"));' />
+					<br />
+					<br />
+					Tournament Logo  <i>(Coming Soon)</i><input type='file' id='tournamentLogoFile'/>
+					<br />
+					Game Logo  <i>(Coming Soon)</i><input type='file' id='gameLogoFile' onchange='handleGame(this)' />
 					<br />
 					<hr />
 				</form>
