@@ -1,52 +1,4 @@
-var background = null;
-var char1url = null;
-var char2url = null;
-var char3url = null;
-var char4url = null;
-var name1str = null;
-var name2str = null;
-var nameplateUrl = null;
-var nameplateX = null;
-var nameplateY = null;
-var nameplateDupX = null;
-var nameplateDupY = null;
-var player1 = null;
-var player2 = null;
-var player3 = null;
-var player4 = null;
-var tournamentRound = null;
-var tournamentRountFontSz = 60;
-var tournamentRoundColor = null;
-var tournamentLogo = null;
-var gameLogo = null;
-var streamLogo = null;
-var playerFont = null;
-var player1TextPt = {x: 10,	y: 300};
-var player1TextSz = 33;
-var player2TextPt = {x: 10,	y: 800};
-var player2TextSz = 33;
-var player3TextPt = {x: 10,	y: 800};
-var player3TextSz = 33;
-var player4TextPt = {x: 10,	y: 800};
-var player4TextSz = 33;
-var nameplateTextColor = null;
-var tournamentDate = null;
 
-var duplicateNameplate = false;
-
-/** GENERAL FUNCTIONS **/
-function countCharacterDropdowns(){
-	var sum = 0;
-	$('.character_dropdown').each(function(){
-		if($(this).val() != 'Choose One')
-			sum++;
-	});
-	return sum;
-}
-function isSingles(){
-	var ret = countCharacterDropdowns() > 2 ? false : true;
-	return ret;
-}
 
 /** REDRAW THE IMAGE **/
 function redrawCanvas(){
@@ -159,19 +111,6 @@ function rewriteCanvas(){
 	}
 };
 
-/** RETURN URL TO IMAGE **/
-function getImagePath(char, side){
-	if(side === 'right')
-		return 'images/Melee/Thumbs/'+char+'Reverse.png'	
-	return '/images/Melee/Thumbs/'+char+'.png';
-	
-}
-
-function getNameplatesPath(plate){
-	var path = '/images/nameplates/'
-	return path+plate+'.png';
-}
-
 
 /** RETURN THE CONTEXT OF THE CAVAS BELONGING TO THE ID **/
 function getCanvas(canvasId){
@@ -202,6 +141,7 @@ function handleBackground(e){
     reader.readAsDataURL(e.target.files[0]);     
 };
 
+/** NOT WORKING YET **/
 function handleTourney(e){
 	var ctx = getCanvas('previewCanvas');
     var reader = new FileReader();
@@ -275,6 +215,10 @@ function drawCharacter(imgPath, charNumber){
 		if(enhance && isSingles()){
 			height *= enhance;
 			width *= enhance;
+		}
+		else{
+			height *= reduce;
+			width *= reduce;			
 		}
 		
 		var coords = getCharacterCoordinates(canvas, img, charNumber, isSingles());
@@ -365,70 +309,6 @@ function drawText(text, x, y, color, side){
 
 /** END DRAW CHARACTERS AND NAMEPLATES **/
 
-/** MISC **/
-function readURL(input) {
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-    reader.onload = function (e) {
-      $('.blah')
-        .attr('src', e.target.result)
-        .width(150)
-        .height(200);
-    };
-    reader.readAsDataURL(input.files[0]);
-  }
-};
 
-function getNameplateMidY(imgUrl, canvas, side){
-	var img = new Image();
-	img.src = imgUrl;
-	var x = null;
-	var y = null;
-	var justify = null;
-	if(side === 'left')
-		x = nameplateX + 5;
-	else if(side === 'right')
-		x = nameplateDupX + img.width - 5;
-	
-	//y = nameplayteY + img.height;		
-	
-	//The following needs to programmatically find the nameplates	
-	/** NAMEPLATES ON TOP **/
-	y = 34;
-	
-	/** NAMEPLATES ON BOTTOM **/
-	//y = canvas.height - 10;
-	
-	return {x:x, y:y};
-};
 
-var loadImageFromFile = function(input){
-	background = new Image(); //8000 bits 100000
-	var path = getElementById('bgImageFile').val;
-}
-
-var drawImageOnCanvas = function(canvas, image){
-	var ctx = getCanvas(canvasId);
-};
-
-var removeImageFromCanvas = function(canvasId, image){
-	var ctx = getCanvas(canvasId);	
-};
-
-var drawBackground = function(canvasId, image){
-	var ctx = getCanvas(canvasId); 
-	var fileReader = new FileReader(); 
-	
-};
-
-function sleep(delay) {
-    var start = new Date().getTime();
-    while (new Date().getTime() < start + delay);
-  }
-
-function difference(a, b){
-	if(a > b)
-		return a - b;
-	else return b - a;
-}
 
