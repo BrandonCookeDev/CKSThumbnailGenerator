@@ -5,7 +5,7 @@ var p3x = null; var p3y = 50;
 var p4x = null; var p4y = 50;
 
 var xOffset1 = 50;
-var xOffset2 = 120;
+var xOffset2 = 80;
 var yOffset = 15;
 
 var getCharacterCoordinates = function(canvas, image, characterNumber, isSingles){
@@ -28,15 +28,15 @@ var getCharacterCoordinates = function(canvas, image, characterNumber, isSingles
 		}
 		else{
 			p2x = canvas.width/2 + xOffset1;
-			p1y = canvas.height - image.height + yOffset;
+			p2y = canvas.height - image.height + yOffset;
 		}
 		return {x:p2x, y:p2y};
 	case 3:
-		p3x = 0;
+		p3x = 0 - xOffset2;
 		p3y = canvas.height - image.height + yOffset;
 		return {x:p3x, y:p3y};
 	case 4:
-		p4x = canvas.width - image.width;
+		p4x = canvas.width - image.width + xOffset2;
 		p4y = canvas.height - image.height + yOffset;
 		return {x:p4x, y:p4y};
 	default:
