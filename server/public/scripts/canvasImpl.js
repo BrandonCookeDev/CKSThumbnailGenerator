@@ -402,27 +402,6 @@ function getNameplateMidY(imgUrl, canvas, side){
 	return {x:x, y:y};
 };
 
-/** DOWNLOAD IMAGES **/
-document.getElementById('downloadBtn').addEventListener('click', function(){
-	document.getElementById('downloadProxy').click();
-});
-
-document.getElementById('downloadProxy').addEventListener('click', function() {
-    var name = '';
-	if(player3 && player4 && player1 && player2)
-		name = 'Mathchup ' + player1 + " & " + player3 + " vs " + player2 + " & " + player4 + "_" + tournamentRound + ".png";
-	else if(player1 && player2)
-		name = 'Matchup ' + player1 + " vs " + player2 + "_" + tournamentRound + ".png";
-	else name = "Matchup.png";
-	downloadCanvas(this, 'previewCanvas', name);
-}, false);
-
-/** Download Canvas **/
-function downloadCanvas(link, canvasId, filename) {
-    link.href = document.getElementById(canvasId).toDataURL();
-    link.download = filename;
-}
-
 var loadImageFromFile = function(input){
 	background = new Image(); //8000 bits 100000
 	var path = getElementById('bgImageFile').val;
@@ -430,7 +409,6 @@ var loadImageFromFile = function(input){
 
 var drawImageOnCanvas = function(canvas, image){
 	var ctx = getCanvas(canvasId);
-	
 };
 
 var removeImageFromCanvas = function(canvasId, image){
