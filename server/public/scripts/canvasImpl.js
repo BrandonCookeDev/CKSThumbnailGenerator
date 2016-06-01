@@ -277,7 +277,7 @@ function drawCharacter(imgPath, charNumber){
 			width *= enhance;
 		}
 		
-		var coords = getCharacterCoordinates(canvas, img, charNumber);
+		var coords = getCharacterCoordinates(canvas, img, charNumber, isSingles());
 		if(charNumber === 1)
 			ctx.drawImage(img, coords.x, coords.y, width, height);				
 		else if(charNumber === 2){
@@ -399,10 +399,10 @@ function getNameplateMidY(imgUrl, canvas, side){
 	/** NAMEPLATES ON BOTTOM **/
 	//y = canvas.height - 10;
 	
-	
 	return {x:x, y:y};
 };
 
+/** DOWNLOAD IMAGES **/
 document.getElementById('downloadBtn').addEventListener('click', function(){
 	document.getElementById('downloadProxy').click();
 });
@@ -410,9 +410,9 @@ document.getElementById('downloadBtn').addEventListener('click', function(){
 document.getElementById('downloadProxy').addEventListener('click', function() {
     var name = '';
 	if(player3 && player4 && player1 && player2)
-		name = 'Mathchup ' + player1 + " & " + player3 + " vs " + player2 + " & " + player4 + ".png";
+		name = 'Mathchup ' + player1 + " & " + player3 + " vs " + player2 + " & " + player4 + "_" + tournamentRound + ".png";
 	else if(player1 && player2)
-		name = 'Matchup ' + player1 + " vs " + player2 + ".png";
+		name = 'Matchup ' + player1 + " vs " + player2 + "_" + tournamentRound + ".png";
 	else name = "Matchup.png";
 	downloadCanvas(this, 'previewCanvas', name);
 }, false);

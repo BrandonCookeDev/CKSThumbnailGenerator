@@ -7,16 +7,26 @@ var p4x = null; var p4y = 50;
 var xOffset = 120;
 var yOffset = 15;
 
-var getCharacterCoordinates = function(canvas, image, characterNumber){
+var getCharacterCoordinates = function(canvas, image, characterNumber, isSingles){
 	this.canvas = canvas;
 	switch(characterNumber){
 	case 1:
-		p1x = canvas.width/2 - image.width - xOffset;
-		p1y = canvas.height - image.height + yOffset;
+		if(isSingles){
+			p1x = (canvas.width * 1/4) - image.width;//- image.width - xOffset;
+			p1y = canvas.height - image.height + yOffset;
+		}
+		else{
+			
+		}
 		return {x:p1x, y:p1y};
 	case 2:
-		p2x = canvas.width/2;
-		p2y = canvas.height - image.height + yOffset;
+		if(isSingles){
+			p2x = canvas.width * (3/4) - image.width/2;// + image.width ;// - xOffset;//- image.width;
+			p2y = canvas.height - image.height + yOffset;			
+		}
+		else{
+			
+		}
 		return {x:p2x, y:p2y};
 	case 3:
 		p3x = -1 * xOffset;
