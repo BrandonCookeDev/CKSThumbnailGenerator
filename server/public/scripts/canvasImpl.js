@@ -28,8 +28,7 @@ function redrawCanvas(){
 	}
 
 	if(tournamentLogo){
-    	ctx.drawImage(tournamentLogo, (canvas.width/2 - tournamentLogo.width/2), tournamentLogo.height/2);
-		//drawLogo(tournamentLogo, 'tourney');
+		drawLogo(tournamentLogo, 'tournament');
 	}
 	if(gameLogo){
 		drawLogo(gameLogo, 'game');
@@ -144,54 +143,12 @@ function handleBackground(e){
 /** NOT WORKING YET **/
 function handleTourney(e){
 	var ctx = getCanvas('previewCanvas');
-    var reader = new FileReader();
     reader.onload = function(event){
         var img = new Image();
         img.onload = function(){
         	var canvas = document.getElementById('previewCanvas');
-        	//img.width = canvas.width;
-        	//img.height = canvas.height;
-        	tournamentLogo = img;
-            redrawCanvas();
-        	//ctx.drawImage(img,0,0, img.width, img.height);
-        }
-        img.src = event.target.result;
-    }
-    reader.readAsDataURL(e.target.files[0]);     
-};
-function handleStream(e){
-	var canvas = document.getElementById('previewCanvas');
-	var ctx = getCanvas('previewCanvas');
-    var reader = new FileReader();
-    reader.onload = function(event){
-        var img = new Image();
-        img.onload = function(){
-        	var canvas = document.getElementById('previewCanvas');
-        	img.width = canvas.width;
-        	img.height = canvas.height;
-        	streamLogo = img;
-            redrawCanvas();
-            x = (canvas.width / 2) - (img.width/2);
-    		y = canvas.height - img.height;
-        	ctx.drawImage(img, x, y);
-        }
-        img.src = event.target.result;
-    }
-    reader.readAsDataURL(e.target.files[0]);     
-};
-
-function handleGame(e){
-	var ctx = getCanvas('previewCanvas');
-    var reader = new FileReader();
-    reader.onload = function(event){
-        var img = new Image();
-        img.onload = function(){
-        	var canvas = document.getElementById('previewCanvas');
-        	img.width = canvas.width;
-        	img.height = canvas.height;
-        	gameLogo = img;
-            redrawCanvas();
-        	//ctx.drawImage(img,0,0, img.width, img.height);
+        	tournamentLogo = img.src;
+        	drawLogo(img.src, 'tournament');
         }
         img.src = event.target.result;
     }
@@ -263,22 +220,28 @@ function drawNameplate(imgPath, duplicate){
 };
 
 function drawLogo(logoUrl, type){
+	if(logoUrl && logoUrl.includes('http://'))
+		logoUrl = logoUrl.substring(streamLogo.indexOf('images/'));
 	var x, y;
 	var canvas = document.getElementById('previewCanvas');
 	var ctx = getCanvas('previewCanvas');
 	var img = new Image();
 	img.src = logoUrl;
 	if(type === 'game'){
-		gameLogo = img.src;
+		gameLogo = logoUrl;
+		
 		x = canvas.width/2;
 		y = canvas.height/5;
 	}
-	else if(type === 'tourney'){
-		tournamentLogo = img.src;
-		x = canvas.width/2;
-		y = canvas.height / 2;
+	else if(type === 'tournament'){
+		tournamentLogo = logoUrl;
+		
+		x = canvas.width/2 - img.width/2;
+		y = canvas.height/2 - img.height/2;
 	}
 	else if(type === 'stream'){
+		streamLogo = logoUrl;
+		
 		img.width = 150;
 		img.height = 120;
 		streamLogo = img.src;
