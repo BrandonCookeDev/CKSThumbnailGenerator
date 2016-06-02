@@ -269,8 +269,11 @@ function drawText(text, x, y, color, side){
 		ctx.textAlign='left';
 	ctx.fillText(text, x, y);
 };
-
-/** END DRAW CHARACTERS AND NAMEPLATES **/
+/*
+$('#ParentContainer').scroll(function() { 
+    $('#preview').css('top', $(this).scrollTop());
+});
+*/
 
 
 

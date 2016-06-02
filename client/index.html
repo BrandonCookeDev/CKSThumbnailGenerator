@@ -22,13 +22,20 @@
 				border: 2px solid black;
 				float:left;
 			}
+			div.fixeddiv{
+				text-align:center;
+				width:65%;			
+				background-color:#a6a6a6;
+				border: 2px solid black;
+				position:fixed;
+			}
 			canvas.preview{
 				border: 1px solid black;
 			}
 		</style>
 	</head>
 	
-	<body ng-controller='MainCtrl'>
+	<body ng-controller='MainCtrl' id='ParentContainer'>
 		<div class='wrapper'>
 			<div class='form'>
 				<h2>Options</h2>
@@ -127,24 +134,26 @@
 				</form>
 			</div>
 			<div class='preview'>
-				<span>
-					<h2>Preview</h2>
-				</span>
-				<span>
-					<canvas id='previewCanvas' width='711' height='400'>
-						
-					</canvas>
-				</span>
-				<br /><br />
-				<span>
-					<input type='image' id='downloadBtn' src='/images/misc/download.png' height='150' width='150' />
-					<a id='downloadProxy'></a>
-					<!-- <input type='button' id='submitPictureBtn' value='Save' onclick='submitPicture()'/> -->
-					<!-- <input type='button' id='testBtn' value='test' onclick='drawCharacter("/images/Melee/Thumbs/Sheik.png", 1)'/> -->
-				</span>
-				<!-- 
-					<img src='/images/Melee/Thumbs/Sheik.png' />
-				-->
+				<div class='fixeddiv'>
+					<span>
+						<h2>Preview</h2>
+					</span>
+					<span>
+						<canvas id='previewCanvas' width='711' height='400'>
+							
+						</canvas>
+					</span>
+					<br /><br />
+					<span>
+						<input type='image' id='downloadBtn' src='/images/misc/download.png' height='150' width='150' />
+						<a id='downloadProxy'></a>
+						<!-- <input type='button' id='submitPictureBtn' value='Save' onclick='submitPicture()'/> -->
+						<!-- <input type='button' id='testBtn' value='test' onclick='drawCharacter("/images/Melee/Thumbs/Sheik.png", 1)'/> -->
+					</span>
+					<!-- 
+						<img src='/images/Melee/Thumbs/Sheik.png' />
+					-->
+				</div>
 			</div>
 		</div>
 	</body>
